@@ -1,0 +1,45 @@
+.br-button{
+  border-radius: 5px 5px 5px 5px;
+}
+
+.size-button{
+  width: 110px;
+  height: 80px;
+}
+
+.m-t-button{
+  margin-top:230px;
+}
+
+.header_fijo {
+  width: 411px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.header_fijo thead tr {
+  display: block;
+  position: relative;
+}
+
+.header_fijo tbody {
+  display: block;
+  //overflow: auto;
+  width: 100%;
+  height: 180px;
+}
+.w-500{
+    width: 500px;
+}
+.w-250{
+  width: 250px;
+}
+.w-880{
+  width: 880px;
+}
+.h-400{
+  height: 400px;
+}
+.over-flow-y{
+  overflow-y: auto;
+}

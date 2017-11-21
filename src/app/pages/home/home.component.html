@@ -14,66 +14,12 @@
                                     <th scope="col" class="w-250">Deuda</th>
                                 </tr>
                                 </thead>
-                                <tbody style="width: 880px; height: 400px; overflow-y: auto">
-                                <tr>
-                                    <td class="w-500">Paola Geraldine Gama Diaz</td>
-                                    <td class="w-250">$1.00</td>
-                                    <td class="w-250">$0.00</td>
+                                <tbody style="width: 880px; height: 400px; overflow-y: auto" >
+                                <tr *ngFor="let deudor of deudores | async">
+                                    <td class="w-500">{{deudor.nombre}}</td>
+                                    <td class="w-250">{{"$"+ deudor.totalAbono+".00"}}</td>
+                                    <td class="w-250">{{"$"+ deudor.totalDeuda+".00"}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr><tr>
-                                    <td>Juan Pablo Bracamonte Del Valle</td>
-                                    <td>$1000000.00</td>
-                                    <td>$1000000.00</td>
-                                </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -108,11 +54,13 @@
                             <!--Buscar-->
                             <div class="m-t-30">
                                 <div class="input-group">
+                                    <!--input-->
                                     <input type="text" class="form-control" placeholder="Buscar por nombre..."
                                            aria-label="Search for...">
                                     <span class="input-group-btn">
+                                        <!--button-->
                                         <button class="btn btn-secondary" type="button">
-                                            <i class="zmdi zmdi-search"></i>
+                                            <i class="zmdi zmdi-search"></i><!--buscar-->
                                         </button>
                                     </span>
                                 </div>

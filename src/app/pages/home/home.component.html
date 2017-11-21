@@ -15,10 +15,10 @@
                                 </tr>
                                 </thead>
                                 <tbody style="width: 880px; height: 400px; overflow-y: auto" >
-                                <tr *ngFor="let deudor of deudores | async">
-                                    <td class="w-500">{{deudor.nombre}}</td>
-                                    <td class="w-250">{{"$"+ deudor.totalAbono+".00"}}</td>
-                                    <td class="w-250">{{"$"+ deudor.totalDeuda+".00"}}</td>
+                                <tr *ngFor="let deud of deudorTemporal  ">
+                                    <td class="w-500">{{deud.nombre}}</td>
+                                    <td class="w-250">{{"$"+ deud.totalAbono+".00"}}</td>
+                                    <td class="w-250">{{"$"+ deud.totalDeuda+".00"}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -56,11 +56,11 @@
                                 <div class="input-group">
                                     <!--input-->
                                     <input type="text" class="form-control" placeholder="Buscar por nombre..."
-                                           aria-label="Search for...">
+                                           aria-label="Search for..."  #buscarDeudor (keyup.enter)="searchDebtor(buscarDeudor.value)">
                                     <span class="input-group-btn">
                                         <!--button-->
                                         <button class="btn btn-secondary" type="button">
-                                            <i class="zmdi zmdi-search"></i><!--buscar-->
+                                            <i class="zmdi zmdi-search" (click)="searchDebtor(buscarDeudor.value)"></i><!--buscar-->
                                         </button>
                                     </span>
                                 </div>

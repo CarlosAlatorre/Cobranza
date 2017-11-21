@@ -19,8 +19,7 @@ import { HistorialComponent } from './modals/historial/historial.component';
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent,
-        HistorialComponent
+        LoginComponent
     ],
     imports: [
         FormsModule,

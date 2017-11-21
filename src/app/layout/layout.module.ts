@@ -30,7 +30,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SearchComponent,
         NavigationComponent,
         NavigationTriggerComponent,
-        HomeComponent
+        HomeComponent,
+        HistorialComponent
     ],
     imports: [
         CommonModule,

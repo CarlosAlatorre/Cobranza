@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AgregarDeudorComponent} from "../../modals/agregar-deudor/agregar-deudor.component";
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
   }
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   openModal(){
-
+    this.modalService.open(AgregarDeudorComponent, {backdrop: 'static', keyboard: false, size: "lg"});
   }
 
 }

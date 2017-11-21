@@ -19,8 +19,7 @@ import { AgregarDeudorComponent } from './modals/agregar-deudor/agregar-deudor.c
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent,
-        AgregarDeudorComponent
+        LoginComponent
     ],
     imports: [
         FormsModule,
@@ -30,8 +29,6 @@ import { AgregarDeudorComponent } from './modals/agregar-deudor/agregar-deudor.c
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule, // imports firebase/database, only needed for database features
         AngularFireAuthModule
-
-
     ],
     providers: [
         SharedService,

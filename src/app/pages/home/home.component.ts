@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase) {
 
+
   }
+
+
 
   ngOnInit() {
       this.deudores=this.db.list('deudores');
@@ -26,6 +29,19 @@ export class HomeComponent implements OnInit {
       })
   }
     
+
+  getNameToSearch(terminoBusqueda: string){
+    console.log(terminoBusqueda);
+  }
+
+  // // buscador
+  searchDebtor(terminoBusqueda:string){
+    if (!this.deudor) {
+      this.deudorTemporal= []
+    }else {
+        this.deudorTemporal = this.deudor.filter(it => it.nombre.toLowerCase().indexOf(terminoBusqueda.toLowerCase()) >= 0);
+    }
+  }
 
   getNameToSearch(terminoBusqueda: string){
     console.log(terminoBusqueda);

@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
     console.log("comentarios qwerty")
   }
 
+  openModal(){
+  }
+
+
 }

@@ -14,11 +14,13 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import {LoginComponent} from "./pages/login/login.component";
 import {alertService} from "./services/alert.service";
+import { HistorialComponent } from './modals/historial/historial.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        HistorialComponent
     ],
     imports: [
         FormsModule,

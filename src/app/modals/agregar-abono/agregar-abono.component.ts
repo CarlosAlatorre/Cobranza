@@ -32,7 +32,8 @@ export class AgregarAbonoComponent implements OnInit {
 
   agregarAbono(cantidad:number){
       let totalDeudaNeta:number = this.userTemp.totalDeuda;
-      this.debtService.updateDebt(this.keyDebt,totalDeudaNeta-cantidad,cantidad)
+      this.debtService.updateDebt(this.keyDebt,totalDeudaNeta-cantidad,cantidad);
+
   }
 
 }

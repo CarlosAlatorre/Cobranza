@@ -3,6 +3,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 import {consoleTestResultHandler} from "tslint/lib/test";
+import {HistorialComponent} from "../../modals/historial/historial.component";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,9 @@ export class HomeComponent implements OnInit {
   deudor:any[]=[];
   deudorTemporal:any[]=[];
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase,
+              private activeModal:NgbActiveModal,
+              private modalService:NgbModal) {
 
 
   }
@@ -32,6 +35,10 @@ export class HomeComponent implements OnInit {
 
   getNameToSearch(terminoBusqueda: string){
     console.log(terminoBusqueda);
+  }
+
+  openHistory(){
+    this.modalService.open(HistorialComponent,{backdrop: 'static', keyboard: false, size: "lg"} );
   }
 
   // // buscador

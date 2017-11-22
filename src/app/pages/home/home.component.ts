@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase,
               private activeModal:NgbActiveModal,
-              private modalService:NgbModal) {
 
   }
 

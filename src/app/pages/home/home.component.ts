@@ -43,8 +43,9 @@ export class HomeComponent implements OnInit {
       this.modalService.open(HistorialComponent,{backdrop: 'static', keyboard: false, size: "lg"} );
   }
 
-  openAddMoney(){
-      this.modalService.open(AgregarAbonoComponent, {backdrop: 'static', keyboard: false, size: "lg"} )
+  openAddMoney(keyDebt:string){
+      const modalRef = this.modalService.open(AgregarAbonoComponent, {backdrop: 'static', keyboard: false, size: "lg"} )
+      modalRef.componentInstance.keyDebt = keyDebt;
   }
 
   // // buscador

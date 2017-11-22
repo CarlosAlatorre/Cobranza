@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {consoleTestResultHandler} from "tslint/lib/test";
 // import {ReportComponent} from "../../modals/report/report.component";
 import {HistorialComponent} from "../../modals/historial/historial.component";
+import {AgregarAbonoComponent} from "../../modals/agregar-abono/agregar-abono.component";
 
 @Component({
   selector: 'app-home',
@@ -18,12 +19,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase,
               private activeModal:NgbActiveModal,
+              private modalService:NgbModal){
+
 
   }
 
 
 
-  ngOnInit() {
+  ngOnInit(){
       this.deudores=this.db.list('deudores');
       this.deudores.subscribe(result=>{
         this.deudorTemporal=result;
@@ -37,17 +40,21 @@ export class HomeComponent implements OnInit {
   }
 
   openHistory(){
-    this.modalService.open(HistorialComponent,{backdrop: 'static', keyboard: false, size: "lg"} );
+      this.modalService.open(HistorialComponent,{backdrop: 'static', keyboard: false, size: "lg"} );
+  }
+
+  openAddMoney(){
+      this.modalService.open(AgregarAbonoComponent, {backdrop: 'static', keyboard: false, size: "lg"} )
   }
 
   // // buscador
-  searchDebtor(terminoBusqueda:string){
-    if (!this.deudor) {
-      this.deudorTemporal= []
-    }else {
-        this.deudorTemporal = this.deudor.filter(it => it.nombre.toLowerCase().indexOf(terminoBusqueda.toLowerCase()) >= 0);
+    searchDebtor(terminoBusqueda:string){
+        if (!this.deudor) {
+            this.deudorTemporal= []
+        }else {
+            this.deudorTemporal = this.deudor.filter(it => it.nombre.toLowerCase().indexOf(terminoBusqueda.toLowerCase()) >= 0);
+        }
     }
-  }
 
     // openReport() {
     //     this.modalService.open(ReportComponent, {backdrop: 'static ', keyboard: false, size: "lg"});

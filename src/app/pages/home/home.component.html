@@ -20,7 +20,7 @@
                                     <td class="w-500">{{deud.nombre}}</td>
                                     <td class="w-250">{{"$"+ deud.totalAbono+".00"}}</td>
                                     <td class="w-250">{{"$"+ deud.totalDeuda+".00"}}</td>
-                                    <td class="w-250"><i class="zmdi zmdi-plus-circle-o zmdi-hc-2x" style="margin-left: 30px"></i></td>
+                                    <td class="w-250"><i class="zmdi zmdi-plus-circle-o zmdi-hc-2x" (click)="openAddMoney()" style="margin-left: 30px;cursor: pointer;"></i></td>
                                 </tr>
                                 </tbody>
                             </table>

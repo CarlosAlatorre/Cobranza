@@ -3,6 +3,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 import {consoleTestResultHandler} from "tslint/lib/test";
+import {ReportComponent} from "../../modals/report/report.component";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomeComponent implements OnInit {
   deudor:any[]=[];
   deudorTemporal:any[]=[];
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase,
+              private modalService: NgbModal) {
 
 
   }
@@ -42,5 +44,10 @@ export class HomeComponent implements OnInit {
         this.deudorTemporal = this.deudor.filter(it => it.nombre.toLowerCase().indexOf(terminoBusqueda.toLowerCase()) >= 0);
     }
   }
+
+    openReport() {
+        this.modalService.open(ReportComponent, {backdrop: 'static ', keyboard: false, size: "lg"});
+
+    }
 
 }

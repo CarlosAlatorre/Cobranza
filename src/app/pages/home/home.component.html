@@ -1,3 +1,112 @@
-<section>
-  <button class="btn btn-success" (click)="openModal()">Abrir Historial</button>
+<section class="content content-standard" style="height: 100vh">
+    <div class="row" style="height: 670px">
+        <div class="col-12">
+            <div class="row" style="height: 670px">
+                <!--Apartado izq-->
+                <div class="card col-9">
+                    <div class="row">
+                        <div class="offset-1 col-12">
+                            <table class="table table-striped m-t-30 header_fijo">
+                                <thead>
+                                <tr class="w-880">
+                                    <th scope="col" class="w-500">Nombre</th>
+                                    <th scope="col" class="w-250">Abono</th>
+                                    <th scope="col" class="w-250">Deuda</th>
+                                </tr>
+                                </thead>
+                                <tbody style="width: 880px; height: 400px; overflow-y: auto" >
+                                <tr *ngFor="let deud of deudorTemporal  ">
+                                    <td class="w-500">{{deud.nombre}}</td>
+                                    <td class="w-250">{{"$"+ deud.totalAbono+".00"}}</td>
+                                    <td class="w-250">{{"$"+ deud.totalDeuda+".00"}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row m-t-30">
+                        <div class="offset-1 col-12">
+                            <div class="" style="margin-left: 30px;">
+                                <button class="btn br-button size-button">
+                                    <i class="zmdi zmdi-plus zmdi-hc-5x"></i>
+                                </button>
+                                <button class="btn br-button size-button"
+                                        style="margin-left: 50px">
+                                    <i class="zmdi zmdi-file-text zmdi-hc-5x"></i>
+                                </button>
+                                <button class="btn br-button size-button"
+                                        style="margin-left: 50px ">
+                                    <i class="zmdi zmdi-time-restore zmdi-hc-5x"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Apartado der-->
+                <div class="card col-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="m-t-50 m-l-30">
+                                <!--<i class="zmdi zmdi-filter-list zmdi-hc-2x"></i>-->
+                                <img src="../../../assets/images/filter3.png" alt="" style="width: 25px; height: 25px">
+                                <span class="m-l-10" style="font-size: 16px; margin-top: 10px;">Filtros</span>
+                            </div>
+                            <!--Buscar-->
+                            <div class="m-t-30">
+                                <div class="input-group">
+                                    <!--input-->
+                                    <input type="text" class="form-control" placeholder="Buscar por nombre..."
+                                           aria-label="Search for..."  #buscarDeudor (keyup.enter)="searchDebtor(buscarDeudor.value)">
+                                    <span class="input-group-btn">
+                                        <!--button-->
+                                        <button class="btn btn-secondary" type="button">
+                                            <i class="zmdi zmdi-search" (click)="searchDebtor(buscarDeudor.value)"></i><!--buscar-->
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <!--Totales-->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card m-t-50" style="height: 250px">
+                                        <h4 class="card-header p-t-15 p-b-15 p-r-20" style="background-color: #DCDCDC"
+                                            align="center">Totales</h4>
+                                        <div class="card-body m-l-30" style="font-size: 16px">
+
+                                            <div class="row m-t-20">
+                                                <div class="col-4">
+                                                    <span> Deudores</span>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span>$1000.00</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row m-t-20">
+                                                <div class="col-4">
+                                                    <span>Pagados</span>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span>$1000.00</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row m-t-20">
+                                                <div class="col-4">
+                                                    <span>Total</span>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span>$2000.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

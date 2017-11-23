@@ -43,4 +43,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  openModal(){
+  }
 }

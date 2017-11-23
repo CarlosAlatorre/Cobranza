@@ -1,0 +1,64 @@
+<section>
+    <div class="cardAddMoney">
+        <div class="row">
+            <div class="col-12">
+                <i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>
+            </div>
+        </div>
+        <div class="row" align="center">
+            <div class="col-12">
+                <h3>Datos del deudor</h3>
+            </div>
+        </div>
+        <div class="row" algn="center">
+
+            <div class="col-8">
+                <div class="row rowInfoStyle">
+                    <div class="col-12">
+                        <span style="font-size: 18px"> <strong>Nombre:</strong></span>
+                        <span style="font-size: 15px">{{userTemp.nombre}} </span>
+                    </div>
+                </div>
+                <div class="row rowInfoStyle">
+                    <div class="col-12">
+                        <span style="font-size: 18px"> <strong>Dirección:</strong></span>
+                        <span style="font-size: 15px">{{userTemp.domicilio}} </span>
+                    </div>
+                </div>
+                <div class="row rowInfoStyle">
+                    <div class="col-12">
+                        <span style="font-size: 18px"> <strong>Teléfono:</strong></span>
+                        <span style="font-size: 15px">{{userTemp.telefono}} </span>
+                    </div>
+                </div>
+                <div class="row rowInfoStyle">
+                    <div class="col-12">
+                        <span style="font-size: 18px"> <strong>Vencimiento:</strong></span>
+                        <span style="font-size: 15px">{{userTemp.vencimiento}} </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row mt-20">
+                    <div class="col-12">
+                        <span style="font-size: 18px"> <strong>Total a deber:</strong></span>
+                        <span style="font-size: 15px">{{userTemp.totalDeuda}} </span>
+                    </div>
+                </div>
+                <div class="row mt-20">
+                    <div class="col-10">
+
+                        <div  class="form-group form-group--float inputFieldStyle">
+                            <span style="font-size: 18px"> <strong>Ingresar abono:</strong></span>
+                            <input  class="form-control" placeholder="Ingrese la cantidad" type="text"
+                                    [(ngModel)]="abono" name="abono" (keyup.enter)="agregarAbono(abono)"
+                            >
+
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

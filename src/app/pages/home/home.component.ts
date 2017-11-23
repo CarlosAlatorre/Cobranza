@@ -14,26 +14,35 @@ export class HomeComponent implements OnInit {
   deudores:FirebaseListObservable<any[]>;
   deudor:any[]=[];
   deudorTemporal:any[]=[];
+  debtor:any[]=[];
+  debtorTemp:any[]=[];
+  deudasLength:any[]=[];
+totalDeudas:number=0;
+totalAbonos:number=0;
+totalNeto:number=0;
 
   constructor(private db: AngularFireDatabase,
               private modalService: NgbModal) {
-
-
   }
 
 
 
   ngOnInit() {
       this.deudores=this.db.list('deudores');
-      this.deudores.subscribe(result=>{
-        this.deudorTemporal=result;
-        this.deudor=result;
-      })
-  }
-    
+      this.deudores.subscribe((result:any)=>{
+      this.deudor=result;
+          for(let i = 0; i <= result.length - 1; i++){
 
-  getNameToSearch(terminoBusqueda: string){
-    console.log(terminoBusqueda);
+              this.totalDeudas += result[i].totalDeuda;
+              this.totalAbonos += result[i].totalAbono;
+
+              if(result[i].estado=="deuda"||result[i].estado =="Deuda"){
+                  this.deudorTemporal.push(result[i]);
+              }
+          }
+          this.totalNeto=this.totalAbonos + this.totalAbonos;
+      })
+
   }
 
   // // buscador
@@ -46,8 +55,8 @@ export class HomeComponent implements OnInit {
   }
 
     openReport() {
-        this.modalService.open(ReportComponent, {backdrop: 'static ', keyboard: false, size: "lg"});
-
+        // this.modalService.open(ReportComponent, {backdrop: 'static ', keyboard: false, size: "lg"});
+        this.modalService.open(ReportComponent, {backdrop:'static', keyboard: false, size: "lg"});
     }
 
 }

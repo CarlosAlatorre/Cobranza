@@ -1,0 +1,49 @@
+<section>
+    <div class="cardModalReport">
+        <div class="row">
+            <div class="col-12">
+                <!--boton de cerrar-->
+                <div class="row">
+                <div class="col-12">
+                <i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>
+                </div>
+                </div>
+                <!--titulo-->
+                <div align="center"><h1>Reporte cuentas por cobrar</h1>
+                </div>
+                <!--tabla-->
+                <div class="row">
+                    <div class="col-12" style="height: 400px">
+                        <table class="table m-t-20 header_fijo m-l-25" id="tablaHistorial" style="width: 750px; height: 400px; background-color: white">
+                            <thead class="thead-inverse">
+                            <tr style="width: 750px">
+                                <th scope="col" class="w-300">Nombre</th>
+                                <th scope="col" class="w-200">Deuda</th>
+                                <th scope="col" class="w-200">Vencimiento</th>
+                            </tr>
+                            </thead>
+                            <tbody style="width: 750px; height: 350px; overflow-y: auto">
+
+                            <tr *ngFor="let reporte of deudorTemporal">
+                                <td class="w-300">{{reporte.nombre}}</td>
+                                <td class="w-200">{{"$"+reporte.totalDeuda+".00"}}</td>
+                                <td class="w-200">{{reporte.vencimiento}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--boton-->
+                <div class="row">
+                    <div class="col-12 m-t-20">
+                        <button class="btn btn-success btn-lg m-t-20 m-b-20" (click)="generatePDF()"
+                                style=" border-radius: 5px 5px 5px 5px; margin-left: 670px;">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

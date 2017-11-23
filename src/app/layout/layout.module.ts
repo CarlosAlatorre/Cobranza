@@ -20,6 +20,7 @@ import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {HistorialComponent} from "../modals/historial/historial.component";
 import {DebtService} from "../services/debt.service";
 import {AgregarAbonoComponent} from "../modals/agregar-abono/agregar-abono.component";
+import {ReportComponent} from "../modals/report/report.component";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -34,7 +35,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NavigationTriggerComponent,
         HomeComponent,
         HistorialComponent,
-        AgregarAbonoComponent
+        AgregarAbonoComponent,
+        ReportComponent
     ],
     imports: [
         CommonModule,
@@ -57,6 +59,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     entryComponents:[
         HistorialComponent,
+        ReportComponent,
         AgregarAbonoComponent
     ]
 })

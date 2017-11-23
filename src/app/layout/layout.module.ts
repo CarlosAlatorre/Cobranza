@@ -18,6 +18,8 @@ import {AngularFireDatabase} from "angularfire2/database";
 import {HomeComponent} from "../pages/home/home.component";
 import {ReportComponent} from "../modals/report/report.component";
 import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {HistorialComponent} from "../modals/historial/historial.component";
+
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -32,6 +34,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NavigationTriggerComponent,
         HomeComponent,
         ReportComponent
+        HistorialComponent
     ],
     imports: [
         CommonModule,
@@ -52,7 +55,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NgbModal
     ],
     entryComponents:[
-        ReportComponent
+        ReportComponent,
+        HistorialComponent
     ]
 })
 

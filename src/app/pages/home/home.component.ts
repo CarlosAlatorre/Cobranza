@@ -53,10 +53,8 @@ totalNeto:number=0;
         this.deudorTemporal = this.deudor.filter(it => it.nombre.toLowerCase().indexOf(terminoBusqueda.toLowerCase()) >= 0);
     }
   }
-
     openReport() {
         // this.modalService.open(ReportComponent, {backdrop: 'static ', keyboard: false, size: "lg"});
         this.modalService.open(ReportComponent, {backdrop:'static', keyboard: false, size: "lg"});
     }
-
 }

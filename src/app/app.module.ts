@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 import {LoginComponent} from "./pages/login/login.component";
 import {alertService} from "./services/alert.service";
 
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -28,8 +30,6 @@ import {alertService} from "./services/alert.service";
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule, // imports firebase/database, only needed for database features
         AngularFireAuthModule
-
-
     ],
     providers: [
         SharedService,

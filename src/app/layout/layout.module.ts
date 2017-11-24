@@ -16,6 +16,7 @@ import {alertService} from "../services/alert.service";
 import {AngularFireModule} from "angularfire2";
 import {AngularFireDatabase} from "angularfire2/database";
 import {HomeComponent} from "../pages/home/home.component";
+import {AgregarDeudorComponent} from "../modals/agregar-deudor/agregar-deudor.component";
 import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {HistorialComponent} from "../modals/historial/historial.component";
 import {DebtService} from "../services/debt.service";
@@ -35,6 +36,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NavigationComponent,
         NavigationTriggerComponent,
         HomeComponent,
+        AgregarDeudorComponent,
         HistorialComponent,
         AgregarAbonoComponent,
         ReportComponent,
@@ -63,7 +65,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HistorialComponent,
         ReportComponent,
         AgregarAbonoComponent,
-        ConfirmarAbonoComponent
+        ConfirmarAbonoComponent,
+        AgregarDeudorComponent
+
     ]
 })
 

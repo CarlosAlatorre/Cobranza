@@ -1,16 +1,14 @@
-.br-button{
-  border-radius: 5px 5px 5px 5px;
+.cardModalReport{
+  height: 600px;
+  width: 800px;
 }
-
-.size-button{
-  width: 110px;
-  height: 80px;
+.closeModal{
+  color: #e74c3c;
+  font-size: 40px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 10px;
 }
-
-.m-t-button{
-  margin-top:230px;
-}
-
 .header_fijo {
   width: 411px;
   table-layout: fixed;
@@ -28,10 +26,10 @@
   width: 100%;
   height: 180px;
 }
-.w-500{
-    width: 500px;
+.w-300{
+  width: 500px;
 }
-.w-250{
+.w-200{
   width: 250px;
 }
 .w-880{

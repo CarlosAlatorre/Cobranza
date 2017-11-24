@@ -16,8 +16,12 @@ import {alertService} from "../services/alert.service";
 import {AngularFireModule} from "angularfire2";
 import {AngularFireDatabase} from "angularfire2/database";
 import {HomeComponent} from "../pages/home/home.component";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AgregarDeudorComponent} from "../modals/agregar-deudor/agregar-deudor.component";
+import {NgbActiveModal, NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {HistorialComponent} from "../modals/historial/historial.component";
+import {DebtService} from "../services/debt.service";
+import {AgregarAbonoComponent} from "../modals/agregar-abono/agregar-abono.component";
+import {ReportComponent} from "../modals/report/report.component";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -31,7 +35,10 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NavigationComponent,
         NavigationTriggerComponent,
         HomeComponent,
-        AgregarDeudorComponent
+        AgregarDeudorComponent,
+        HistorialComponent,
+        AgregarAbonoComponent,
+        ReportComponent
     ],
     imports: [
         CommonModule,
@@ -47,9 +54,17 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     providers: [
         alertService,
-        AngularFireDatabase
+        AngularFireDatabase,
+        NgbActiveModal,
+        NgbModal,
+        DebtService
     ],
-    entryComponents: [AgregarDeudorComponent]
+    entryComponents:[
+        HistorialComponent,
+        ReportComponent,
+        AgregarAbonoComponent,
+        AgregarDeudorComponent
+    ]
 })
 
 export class LayoutModule {  }

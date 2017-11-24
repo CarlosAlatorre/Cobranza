@@ -21,6 +21,7 @@ import {HistorialComponent} from "../modals/historial/historial.component";
 import {DebtService} from "../services/debt.service";
 import {AgregarAbonoComponent} from "../modals/agregar-abono/agregar-abono.component";
 import {ReportComponent} from "../modals/report/report.component";
+import {ConfirmarAbonoComponent} from "../modals/confirmar-abono/confirmar-abono.component";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -36,7 +37,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HomeComponent,
         HistorialComponent,
         AgregarAbonoComponent,
-        ReportComponent
+        ReportComponent,
+        ConfirmarAbonoComponent
     ],
     imports: [
         CommonModule,
@@ -60,7 +62,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     entryComponents:[
         HistorialComponent,
         ReportComponent,
-        AgregarAbonoComponent
+        AgregarAbonoComponent,
+        ConfirmarAbonoComponent
     ]
 })
 

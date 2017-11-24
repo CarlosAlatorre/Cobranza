@@ -16,6 +16,13 @@ export class alertService {
             'error'
         )
     }
+    success(title:string, message:string){
+        swal(
+            title,
+            message,
+            'success'
+        )
+    }
     infoTerms(title:string) {
        return new Promise((resolve =>{
            swal({
@@ -72,6 +79,29 @@ export class alertService {
         }))
     }
 
+    confirm(title:string, message:string){
+        return new Promise(((resolve, reject )=> {
+
+            swal({
+                title: title,
+                text: message,
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#2ecc71',
+                confirmButtonText: 'Aceptar',
+                cancelButtonColor:'#e74c3c',
+                cancelButtonText:'Cancelar'
+            }).then(function (result) {
+                if (result) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            })
+
+        }))
+    }
+
     showError(code:string){
 
         let title:string;
@@ -91,7 +121,7 @@ export class alertService {
 
         }
 
-        this.error(title, message);
+        alertService.error(title, message);
 
     }
 }

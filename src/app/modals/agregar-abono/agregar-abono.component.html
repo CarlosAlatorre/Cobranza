@@ -42,21 +42,22 @@
                 <div class="row mt-20">
                     <div class="col-12">
                         <span style="font-size: 18px"> <strong>Total a deber:</strong></span>
-                        <span style="font-size: 15px">{{userTemp.totalDeuda}} </span>
+                        <div style="font-size: 15px">${{userTemp.totalDeuda}} </div>
                     </div>
                 </div>
                 <div class="row mt-20">
                     <div class="col-10">
 
-                        <div  class="form-group form-group--float inputFieldStyle">
+                        <div  class="form-group inputFieldStyle">
                             <span style="font-size: 18px"> <strong>Ingresar abono:</strong></span>
-                            <input  class="form-control" placeholder="Ingrese la cantidad" type="text"
-                                    [(ngModel)]="abono" name="abono" (keyup.enter)="confirmarAbono(abono)"
+                            <input  class="form-control form-control-line" placeholder="Ingrese la cantidad" type="number"
+                                   #abono (keyup.enter)="confirmarAbono(abono.value)" autofocus
                             >
 
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
+                    <button class="btn btn-success m-l-20" (click)="confirmarAbono(abono.value)">Agregar abono</button>
                 </div>
             </div>
         </div>

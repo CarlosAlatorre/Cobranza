@@ -5,5 +5,7 @@ export interface Debtor {
     telefono:number,
     totalDeuda:number,
     vencimiento:string,
-    fechaInicio:string
+    fechaInicio:string,
+    estado:string,
+    totalAbono:number
 }

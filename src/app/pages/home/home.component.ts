@@ -62,6 +62,14 @@ export class HomeComponent implements OnInit {
         modalRef.componentInstance.keyDebt = keyDebt;
     }
 
+    openAddDebtor(){
+        this.modalService.open(AgregarDeudorComponent, {
+            backdrop: 'static',
+            keyboard: false,
+            size: "lg"
+        })
+    }
+
     // // buscador
     searchDebtor(terminoBusqueda: string) {
         if (!this.deudor) {

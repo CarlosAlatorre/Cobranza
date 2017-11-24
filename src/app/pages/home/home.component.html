@@ -15,12 +15,14 @@
                                     <th scope="col" class="w-250">Añadir abono</th>
                                 </tr>
                                 </thead>
-                                <tbody style="width: 880px; height: 400px; overflow-y: auto" >
+                                <tbody style="width: 880px; height: 400px; overflow-y: auto">
                                 <tr *ngFor="let deud of deudorTemporal; let i = index">
                                     <td class="w-500">{{deud.nombre}}</td>
                                     <td class="w-250">{{"$"+ deud.totalAbono+".00"}}</td>
                                     <td class="w-250">{{"$"+ deud.totalDeuda+".00"}}</td>
-                                    <td class="w-250"><i class="zmdi zmdi-plus-circle-o zmdi-hc-2x" (click)="openAddMoney(deud.$key)" style="margin-left: 30px;cursor: pointer;"></i></td>
+                                    <td class="w-250"><i class="zmdi zmdi-plus-circle-o zmdi-hc-2x"
+                                                         (click)="openAddMoney(deud.$key)"
+                                                         style="margin-left: 30px;cursor: pointer;"></i></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -30,7 +32,7 @@
                         <div class="offset-1 col-12">
                             <div class="" style="margin-left: 30px;">
                                 <!--añadir-->
-                                <button class="btn br-button size-button">
+                                <button class="btn br-button size-button" (click)="openAddDebtor()">
                                     <i class="zmdi zmdi-plus zmdi-hc-5x"></i>
                                 </button>
                                 <!--reportes-->
@@ -62,8 +64,13 @@
                                     <span class="input-group-addon" id="sizing-addon1">
                                         <i class="zmdi zmdi-search zmdi-hc-lg" (click)="searchDebtor(buscarDeudor)"></i>
                                     </span>
-                                    <input type="text" class="form-control" placeholder="Buscar por nombre..." aria-describedby="sizing-addon2"
-                                           [(ngModel)]="buscarDeudor" name="buscarDeudor" (ngModelChange)="searchDebtor(buscarDeudor)">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-line" placeholder="Buscar por nombre..."
+                                               aria-describedby="sizing-addon2"
+                                               [(ngModel)]="buscarDeudor" name="buscarDeudor"
+                                               (ngModelChange)="searchDebtor(buscarDeudor)">
+                                        <i class="form-group__bar"></i>
+                                    </div>
                                 </div>
                             </div>
                             <!--Totales-->

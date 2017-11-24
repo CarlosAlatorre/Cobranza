@@ -12,7 +12,7 @@ import {isUndefined} from "util";
 })
 export class AgregarDeudorComponent {
 
-    deptor: Debtor = {} as Debtor;
+    debtor: Debtor = {} as Debtor;
     fechaVencimiento: Date;
 
     constructor(private activeModal: NgbActiveModal,
@@ -24,9 +24,11 @@ export class AgregarDeudorComponent {
         const ref = this.db.list('deudores');
 
         if (!this.errorInFields()) {
-            this.deptor.vencimiento = this.fechaVencimiento.toString();
-            this.deptor.fechaInicio = new Date().toString();
-            ref.push(this.deptor);
+            this.debtor.vencimiento = this.fechaVencimiento.toString();
+            this.debtor.fechaInicio = new Date().toString();
+            this.debtor.estado = "Deuda";
+            this.debtor.totalAbono = 0;
+            ref.push(this.debtor);
             this.activeModal.dismiss();
         } else {
             this.alertService.error('Error en los campos', 'Verifique que todos los campos estén llenos')
@@ -38,19 +40,19 @@ export class AgregarDeudorComponent {
     errorInFields() {
         debugger
         let isError:boolean = false;
-        if (this.deptor.nombre == "" || isUndefined(this.deptor.nombre) ) {
+        if (this.debtor.nombre == "" || isUndefined(this.debtor.nombre) ) {
             isError = true;
         }
-        if (this.deptor.domicilio == "" || isUndefined(this.deptor.domicilio) ) {
+        if (this.debtor.domicilio == "" || isUndefined(this.debtor.domicilio) ) {
             isError = true;
         }
-        if (this.deptor.superficie== "" || isUndefined(this.deptor.superficie) ) {
+        if (this.debtor.superficie== "" || isUndefined(this.debtor.superficie) ) {
             isError = true;
         }
-        if (isUndefined(this.deptor.totalDeuda) ) {
+        if (isUndefined(this.debtor.totalDeuda) ) {
             isError = true;
         }
-        if (isUndefined(this.deptor.telefono) ) {
+        if (isUndefined(this.debtor.telefono) ) {
             isError = true;
         }
         if (isUndefined(this.fechaVencimiento) ) {

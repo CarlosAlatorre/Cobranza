@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AgregarDeudorComponent} from "../../modals/agregar-deudor/agregar-deudor.component";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 import {consoleTestResultHandler} from "tslint/lib/test";

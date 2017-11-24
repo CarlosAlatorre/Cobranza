@@ -1,0 +1,82 @@
+<div class="card m-b-0" style="width: 700px; height: 390px;">
+
+    <div class="card-header" align="center">
+        <h3>AGREGAR DEUDOR</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="offset-1 col-6 p-l-0">
+                <div>Nombre</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="deptor.nombre" name="e" autofocus>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>Total deuda</div>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <div class="form-group">
+                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="deptor.totalDeuda" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-t-20">
+            <div class="offset-1 col-6 p-l-0">
+                <div>Domicilio</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="deptor.domicilio" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>Telefono</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="deptor.telefono" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-t-20">
+            <div class="offset-1 col-6 p-l-0">
+                <div>Superficie</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="deptor.superficie" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>Vencimiento</div>
+                <div class="input-group">
+                    <span class="input-group-addon zmdi zmdi-calendar"></span>
+                    <div class="form-group">
+                        <input type="date" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0; display: -webkit-box !important;" [(ngModel)]="fechaVencimiento" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer p-l-10 m-t-50" align="right">
+        <button type="submit" class="btn btn-success m-r-10" (click)="addDebtor()">Agregar</button>
+        <button class="btn btn-danger" (click)="closeModal()">Cancelar</button>
+    </div>
+
+</div>

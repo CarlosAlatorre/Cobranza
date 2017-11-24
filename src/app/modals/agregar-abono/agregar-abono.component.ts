@@ -46,8 +46,11 @@ export class AgregarAbonoComponent implements OnInit {
 
   confirmarAbono(abono:number){
 
+
     this.abonoAcumulado = this.userTemp.totalAbono + parseInt(abono);
-    console.log("Abono acumulado: ",this.abonoAcumulado);
+
+
+
     this.alertService.confirm("¿Desea confirmar transacción?","").then((response)=>{
       this.agregarAbono(abono);
         this.alertService.success("Abono agregado","");

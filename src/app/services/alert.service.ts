@@ -121,7 +121,7 @@ export class alertService {
 
         }
 
-        alertService.error(title, message);
+        this.error(title, message);
 
     }
 }

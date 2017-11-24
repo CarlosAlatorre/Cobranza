@@ -4,7 +4,6 @@ export interface Debtor {
     superficie:string,
     telefono:number,
     totalDeuda:number,
-    totalAbono:number,
     vencimiento:string,
     fechaInicio:string
 }

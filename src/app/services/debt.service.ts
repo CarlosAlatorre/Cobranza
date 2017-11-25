@@ -17,11 +17,11 @@ export class DebtService {
     }
 
     updateDebt(key:string,totalDeuda:number,abono:number){
-
         this.db.list('deudores/').update(key,{
             totalDeuda:totalDeuda,
             totalAbono:abono
         })
+
 
     }
 

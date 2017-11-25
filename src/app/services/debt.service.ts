@@ -25,4 +25,14 @@ export class DebtService {
 
     }
 
+    updateDebtToPayOffDept(key:string, totalDeuda:number, totalAbono:number){
+        totalAbono = totalDeuda + totalAbono;
+        this.db.list('deudores/')
+            .update(key, {
+                totalDeuda:0,
+                totalAbono: totalAbono,
+                estado:'Pagado'
+            })
+    }
+
 }

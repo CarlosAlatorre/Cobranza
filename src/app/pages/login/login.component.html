@@ -1,88 +1,71 @@
-
 <section>
     <div style="background-color: white;height: 100vh">
         <div class="row">
             <div class="col-12" align="center">
                 <div class="cardLogin">
 
+                    <div class="row ">
+                        <div class="col-12 m-t-20">
+                            <h3 style="color:#03a9f4">Iniciar Sesión</h3>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-12">
-                            <h3 style="margin-top: 15px; color:#03a9f4">Iniciar Sesión</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-10">
 
                             <!--input usuario-->
-                            <div class="row" style="margin-top: 30px;margin-left: 10px">
+                            <div class="row m-l-15 m-t-45">
                                 <div class="col-10">
                                     <i class="zmdi zmdi-email d-ilb"></i>
-                                    <div  class="form-group form-group--float inputFieldStyle">
-                                        <input  class="form-control" placeholder="Usuario" type="email"
-                                                [(ngModel)]="userEmail" name="email" #email required
+                                    <div class="form-group inputFieldStyle">
+                                        <input class="form-control" placeholder="Usuario" type="email"
+                                               [(ngModel)]="userEmail" name="email" #email required
                                         >
 
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
                             </div>
-
 
                             <!--input contraseña-->
-                            <div class="row" style="margin-top: 30px;margin-left: 10px">
+                            <div class="row m-l-15">
 
-                                <div class="col-10" style="margin-left: 10px">
+                                <div class="col-10">
                                     <i class="zmdi zmdi-lock d-ilb"></i>
-                                    <div  class="form-group form-group--float inputFieldStyle">
+                                    <div class="form-group inputFieldStyle">
 
-                                        <input  class="form-control"  type="password"
-                                                [(ngModel)]="userPass" name="pass" required #password
-                                                placeholder="Contraseña"
+                                        <input class="form-control" type="password"
+                                               [(ngModel)]="userPass" name="pass" required #password
+                                               placeholder="Contraseña"
                                         >
 
                                         <i class="form-group__bar"></i>
                                     </div>
-
                                 </div>
-
-                            </div>
-                        </div>
-
-                        <!--columna btn-->
-                        <div class="row">
-
-                            <div class="col-2 positionBtnSignUp">
-
-                                <!--button signUp-->
-                                <div class="btnSignUp" (click)="verifyFieldsLogin(userEmail,userPass);userEmail=null;userPass=null">
-                                    <i class="zmdi zmdi-chevron-right" style="font-size: 30px;color: white;margin-top: 10px;"></i>
-                                </div>
-
                             </div>
 
+                            <div class="btnSignUp" style="    position: absolute;
+    right: -11px;
+    top: 60px;"
+                                 (click)="verifyFieldsLogin(userEmail,userPass);userEmail=null;userPass=null">
+                                <i class="zmdi zmdi-chevron-right"
+                                   style="font-size: 30px;color: white;margin-top: 10px;"></i>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <!--Mensaje de error-->
         <div class="row">
             <div class="col-12" align="center" style="margin-top: 20px">
-                <div  *ngIf="showError"
-                      class="alertMessage alert alert-danger animated {{ showError ? 'bounceIn':'' }}  {{ closeError ? 'bounceOut' : '' }}"
-                      role="alert">
+                <div *ngIf="showError"
+                     class="alertMessage alert alert-danger animated {{ showError ? 'bounceIn':'' }}  {{ closeError ? 'bounceOut' : '' }}"
+                     role="alert">
                     Verifica los campos
                 </div>
             </div>
         </div>
-        <!--fin mensaje error-->
-
     </div>
-
 </section>

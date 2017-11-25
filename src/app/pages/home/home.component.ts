@@ -7,6 +7,8 @@ import {consoleTestResultHandler} from "tslint/lib/test";
 import {ReportComponent} from "../../modals/report/report.component";
 import {HistorialComponent} from "../../modals/historial/historial.component";
 import {AgregarAbonoComponent} from "../../modals/agregar-abono/agregar-abono.component";
+import {AngularFireAuth} from "angularfire2/auth";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-home',
@@ -23,7 +25,14 @@ export class HomeComponent implements OnInit {
 
     constructor(private db: AngularFireDatabase,
                 private activeModal: NgbActiveModal,
-                private modalService: NgbModal) {
+                private modalService: NgbModal,
+                private af:AngularFireAuth,
+                private router: Router) {
+        af.auth.onAuthStateChanged((user)=>{
+            if(!user){
+                this.router.navigate(['login'])
+            }
+        })
     }
 
 

@@ -85,12 +85,12 @@ export class alertService {
             swal({
                 title: title,
                 text: message,
-                type: 'success',
+                type: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#2ecc71',
-                confirmButtonText: 'Aceptar',
+                confirmButtonText: 'Si',
                 cancelButtonColor:'#e74c3c',
-                cancelButtonText:'Cancelar'
+                cancelButtonText:'No'
             }).then(function (result) {
                 if (result) {
                     resolve();

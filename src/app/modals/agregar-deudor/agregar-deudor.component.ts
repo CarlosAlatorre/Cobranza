@@ -38,7 +38,6 @@ export class AgregarDeudorComponent {
     }
 
     errorInFields() {
-        debugger
         let isError:boolean = false;
         if (this.debtor.nombre == "" || isUndefined(this.debtor.nombre) ) {
             isError = true;

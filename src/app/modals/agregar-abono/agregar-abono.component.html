@@ -45,13 +45,16 @@
                         <div style="font-size: 15px">${{userTemp.totalDeuda}} </div>
                     </div>
                 </div>
-                <div class="row mt-20">
+                <div class="row m-t-10">
+                    <button class="btn btn-primary m-l-20" (click)="payOffDebt()">Liquidar deuda</button>
+                </div>
+                <div class="row m-t-15">
                     <div class="col-10">
 
                         <div  class="form-group inputFieldStyle">
                             <span style="font-size: 18px"> <strong>Ingresar abono:</strong></span>
                             <input  class="form-control form-control-line" placeholder="Ingrese la cantidad" type="number"
-                                   #abono (keyup.enter)="confirmarAbono(abono.value)" autofocus
+                                   #abono (keyup.enter)="confirmarAbono(abono.value)" autofocus max="5"
                             >
 
                             <i class="form-group__bar"></i>

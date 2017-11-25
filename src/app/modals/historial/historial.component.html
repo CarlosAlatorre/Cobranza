@@ -38,6 +38,7 @@
                         <th scope="col" class="w-400">Nombre</th>
                         <th scope="col" class="w-150">Estado</th>
                         <th scope="col" class="w-150">Deuda</th>
+                        <th scope="col" class="w-150">Pagado</th>
                         <th scope="col" class="w-150">Vencimiento</th>
                     </tr>
                     </thead>
@@ -47,6 +48,7 @@
                             <td class="w-400">{{debtor.nombre}}</td>
                             <td class="w-150">{{debtor.estado}}</td>
                             <td class="w-150">${{debtor.totalDeuda}}.00</td>
+                            <td class="w-150">${{debtor.totalAbono}}.00</td>
                             <td class="w-150">{{debtor.vencimiento}}</td>
                         </tr>
                     </perfect-scrollbar>

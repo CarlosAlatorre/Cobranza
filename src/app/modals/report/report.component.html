@@ -19,6 +19,7 @@
                             <tr style="width: 750px">
                                 <th scope="col" class="w-300">Nombre</th>
                                 <th scope="col" class="w-200">Deuda</th>
+                                <th scope="col" class="w-200">Pagado</th>
                                 <th scope="col" class="w-200">Vencimiento</th>
                             </tr>
                             </thead>
@@ -27,6 +28,7 @@
                             <tr *ngFor="let reporte of deudorTemporal">
                                 <td class="w-300">{{reporte.nombre}}</td>
                                 <td class="w-200">{{"$"+reporte.totalDeuda+".00"}}</td>
+                                <td class="w-200">{{"$"+reporte.totalAbono+".00"}}</td>
                                 <td class="w-200">{{reporte.vencimiento}}</td>
                             </tr>
                             </tbody>

@@ -6,6 +6,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {alertService} from '../../services/alert.service'
 import {error} from "util";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -28,7 +29,13 @@ export class LoginComponent implements OnInit {
 
 
     constructor(private afAuth:AngularFireAuth,
-                private alertService:alertService) {
+                private alertService:alertService,
+                private router:Router) {
+        this.afAuth.auth.onAuthStateChanged((user)=>{
+            if(user){
+                router.navigate(['principal'])
+            }
+        })
 
     }
     ngOnInit(){
@@ -64,8 +71,7 @@ export class LoginComponent implements OnInit {
 
         this.afAuth.auth.signInWithEmailAndPassword(userEmail,userPass)
             .then((response: any) => {
-                console.log("Te loggeaste :) ",response);
-                // this.isLoading = false;
+                this.router.navigate(['principal']);
             })
             .catch((error: any) => {
                 this.getErrorAuth(error.code);

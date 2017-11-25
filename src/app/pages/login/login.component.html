@@ -36,7 +36,7 @@
 
                                         <input class="form-control" type="password"
                                                [(ngModel)]="userPass" name="pass" required #password
-                                               placeholder="Contraseña"
+                                               placeholder="Contraseña" (keyup.enter)="verifyFieldsLogin(userEmail,userPass)"
                                         >
 
                                         <i class="form-group__bar"></i>
@@ -47,7 +47,7 @@
                             <div class="btnSignUp" style="    position: absolute;
     right: -11px;
     top: 60px;"
-                                 (click)="verifyFieldsLogin(userEmail,userPass);userEmail=null;userPass=null">
+                                 (click)="verifyFieldsLogin(userEmail,userPass)">
                                 <i class="zmdi zmdi-chevron-right"
                                    style="font-size: 30px;color: white;margin-top: 10px;"></i>
                             </div>

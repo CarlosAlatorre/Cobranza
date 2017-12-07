@@ -35,7 +35,8 @@ export class ReportComponent implements OnInit {
         Direccion: 'Direccion',
         Superficie: 'Superficie',
         Deuda: 'Deuda',
-        Vencimiento: 'Vencimiento'
+        ProximoPago: 'Proximo Pago',
+        FechaPago: 'Fecha de Pago'
 
     }
 
@@ -53,7 +54,8 @@ export class ReportComponent implements OnInit {
                             direccion: result[i].domicilio,
                             superficie: result[i].superficie,
                             totalDeuda: "$" + result[i].totalDeuda,
-                            vencimiento: result[i].vencimiento
+                            ProximoPago: "$" + result[i].proximoPago,
+                            FechaPago: result[i].proximoVencimiento
                         });
                 }
             }

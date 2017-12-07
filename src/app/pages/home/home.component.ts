@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
             this.totalDeudas = 0;
             this.totalAbonos = 0;
             this.totalNeto = 0;
-            this.deudor = result;
             for (let i = 0; i <= result.length - 1; i++) {
 
                 this.totalDeudas += result[i].totalDeuda;
@@ -51,6 +50,7 @@ export class HomeComponent implements OnInit {
 
                 if (result[i].estado == "deuda" || result[i].estado == "Deuda") {
                     this.deudorTemporal.push(result[i]);
+                    this.deudor.push(result[i]);
                 }
             }
             this.totalNeto = this.totalAbonos + this.totalDeudas;

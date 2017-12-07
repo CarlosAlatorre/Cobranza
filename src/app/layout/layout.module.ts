@@ -23,6 +23,8 @@ import {DebtService} from "../services/debt.service";
 import {AgregarAbonoComponent} from "../modals/agregar-abono/agregar-abono.component";
 import {ReportComponent} from "../modals/report/report.component";
 import {ConfirmarAbonoComponent} from "../modals/confirmar-abono/confirmar-abono.component";
+import {Select2Module} from "ng2-select2";
+import {DateService} from "../services/date.service";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -59,7 +61,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         AngularFireDatabase,
         NgbActiveModal,
         NgbModal,
-        DebtService
+        DebtService,
+        DateService
     ],
     entryComponents:[
         HistorialComponent,

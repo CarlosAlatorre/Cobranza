@@ -7,5 +7,9 @@ export interface Debtor {
     vencimiento:string,
     fechaInicio:string,
     estado:string,
-    totalAbono:number
+    totalAbono:number,
+    tipoPlazos:number,
+    numeroPlazos:number,
+    proximoPago:number,
+    proximoVencimiento:string
 }

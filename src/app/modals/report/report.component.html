@@ -20,7 +20,8 @@
                                 <th scope="col" class="w-300">Nombre</th>
                                 <th scope="col" class="w-200">Deuda</th>
                                 <th scope="col" class="w-200">Pagado</th>
-                                <th scope="col" class="w-200">Vencimiento</th>
+                                <th scope="col" class="w-200">Proximo Pago</th>
+                                <th scope="col" class="w-200">Fecha de Pago</th>
                             </tr>
                             </thead>
                             <tbody style="width: 750px; height: 350px; overflow-y: auto">
@@ -29,7 +30,8 @@
                                 <td class="w-300">{{reporte.nombre}}</td>
                                 <td class="w-200">{{"$"+reporte.totalDeuda+".00"}}</td>
                                 <td class="w-200">{{"$"+reporte.totalAbono+".00"}}</td>
-                                <td class="w-200">{{reporte.vencimiento}}</td>
+                                <td class="w-200">{{"$"+reporte.proximoPago}}</td>
+                                <td class="w-200">{{reporte.proximoVencimiento}}</td>
                             </tr>
                             </tbody>
                         </table>

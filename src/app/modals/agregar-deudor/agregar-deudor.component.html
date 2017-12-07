@@ -16,12 +16,23 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-2 p-l-0">
                 <div>Total deuda</div>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
                     <div class="form-group">
-                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="debtor.totalDeuda" name="e">
+                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="debtor.totalDeuda" name="e" placeholder="0.00">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2 p-l-0">
+                <div>Anticipo</div>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <div class="form-group">
+                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="anticipo" name="e" placeholder="0.00">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -43,7 +54,7 @@
                 <div>Telefono</div>
                 <div class="input-group">
                     <div class="form-group">
-                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="debtor.telefono" name="e">
+                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;" [(ngModel)]="debtor.telefono" name="e" placeholder="Ejemplo: 6622334455">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -61,17 +72,37 @@
                 </div>
             </div>
 
-            <div class="col-4">
-                <div>Vencimiento</div>
+            <div class="col-2 p-l-0">
+                <div>Plazo</div>
                 <div class="input-group">
-                    <span class="input-group-addon zmdi zmdi-calendar"></span>
                     <div class="form-group">
-                        <input type="date" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0; display: -webkit-box !important;" [(ngModel)]="fechaVencimiento" name="e">
+                        <select name="" id="" class="form-control form-control-line" [(ngModel)]="plazoDePago">
+                            <option [value]="Plazos.semanal">Semanal</option>
+                            <option [value]="Plazos.quincenal">Quincenal</option>
+                            <option [value]="Plazos.mensual">Mensual</option>
+                        </select>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-2 p-l-0">
+                <div>Numero de plazos</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="number" class="form-control p-l-0 form-control-line" [(ngModel)]="debtor.numeroPlazos" name="e">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--<div class="row m-t-20">-->
+            <!--<div class="col-12 m-r-15" align="right" style="top:25px">-->
+                <!--<button type="submit" class="btn btn-success m-r-10" (click)="addDebtor()">Agregar</button>-->
+                <!--<button class="btn btn-danger" (click)="closeModal()">Cancelar</button>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 
     <div class="card-footer p-l-10 m-t-50" align="right">

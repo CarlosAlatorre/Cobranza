@@ -10,20 +10,28 @@
                                 <thead>
                                 <tr class="w-880">
                                     <th scope="col" class="w-500">Nombre</th>
+                                    <th scope="col" class="w-250">Editar nombre</th>
                                     <th scope="col" class="w-250">Total abonado</th>
                                     <th scope="col" class="w-250">Total a deber</th>
                                     <th scope="col" class="w-250">Añadir abono</th>
+                                    <th scope="col" class="w-250">Historial Abono</th>
                                 </tr>
                                 </thead>
                                 <tbody style="width: 880px; height: 400px; overflow-y: auto">
                                 <perfect-scrollbar>
                                     <tr *ngFor="let deud of deudorTemporal; let i = index">
                                         <td class="w-500">{{deud.nombre}}</td>
+                                        <td class="w-250">
+                                            <button class="btn btn-primary" (click)="openEditName(deud.$key)">Editar</button>
+                                        </td>
                                         <td class="w-250">{{"$"+ deud.totalAbono+".00"}}</td>
                                         <td class="w-250">{{"$"+ deud.totalDeuda+".00"}}</td>
                                         <td class="w-250"><i class="zmdi zmdi-plus-circle-o zmdi-hc-2x"
                                                              (click)="openAddMoney(deud.$key)"
                                                              style="margin-left: 30px;cursor: pointer;"></i></td>
+                                        <td class="w-250">
+                                            <button class="btn btn-success">Ver</button>
+                                        </td>
                                     </tr>
                                 </perfect-scrollbar>
                                 </tbody>

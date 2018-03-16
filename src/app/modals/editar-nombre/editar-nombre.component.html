@@ -1,0 +1,21 @@
+<section>
+
+    <div class="card card-size">
+        <div class="card-header text-center p-b-0">
+            <h4>Editar nombre de "{{ debtor.nombre }}"</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group form-group--float">
+                <input type="text" class="form-control form-control-line" #newName formControlFloat (keyup.enter)="updateName(newName.value)">
+                <label>Nuevo nombre</label>
+                <i class="form-group__bar"></i>
+            </div>
+        </div>
+
+        <div class="card-footer p-b-0" align="right">
+            <button class="btn btn-danger m-r-10" (click)="closeModal()">Cancelar</button>
+            <button class="btn btn-primary" (click)="updateName(newName.value)">Aceptar</button>
+        </div>
+    </div>
+
+</section>

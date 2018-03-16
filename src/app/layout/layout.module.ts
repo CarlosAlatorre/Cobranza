@@ -25,6 +25,12 @@ import {ReportComponent} from "../modals/report/report.component";
 import {ConfirmarAbonoComponent} from "../modals/confirmar-abono/confirmar-abono.component";
 import {Select2Module} from "ng2-select2";
 import {DateService} from "../services/date.service";
+import {EditarNombreComponent} from "../modals/editar-nombre/editar-nombre.component";
+import {DeudoresService} from "../services/deudores.service";
+import {ValidationService} from "../services/validation.service";
+import {AuthToChangeNameComponent} from "../modals/auth-to-change-name/auth-to-change-name.component";
+import {AuthService} from "../services/auth.service";
+import {SharedModule} from "../shared/shared.module";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -42,7 +48,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HistorialComponent,
         AgregarAbonoComponent,
         ReportComponent,
-        ConfirmarAbonoComponent
+        ConfirmarAbonoComponent,
+        EditarNombreComponent,
+        AuthToChangeNameComponent
     ],
     imports: [
         CommonModule,
@@ -54,7 +62,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ButtonsModule.forRoot(),
         PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
         NgbModule.forRoot(),
-        NgbModule
+        NgbModule,
+        SharedModule
     ],
     providers: [
         alertService,
@@ -62,15 +71,19 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NgbActiveModal,
         NgbModal,
         DebtService,
-        DateService
+        DateService,
+        DeudoresService,
+        ValidationService,
+        AuthService
     ],
     entryComponents:[
         HistorialComponent,
         ReportComponent,
         AgregarAbonoComponent,
         ConfirmarAbonoComponent,
-        AgregarDeudorComponent
-
+        AgregarDeudorComponent,
+        EditarNombreComponent,
+        AuthToChangeNameComponent
     ]
 })
 

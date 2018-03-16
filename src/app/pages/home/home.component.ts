@@ -9,6 +9,8 @@ import {HistorialComponent} from "../../modals/historial/historial.component";
 import {AgregarAbonoComponent} from "../../modals/agregar-abono/agregar-abono.component";
 import {AngularFireAuth} from "angularfire2/auth";
 import {Router} from "@angular/router";
+import {EditarNombreComponent} from "../../modals/editar-nombre/editar-nombre.component";
+import {AuthToChangeNameComponent} from "../../modals/auth-to-change-name/auth-to-change-name.component";
 
 @Component({
     selector: 'app-home',
@@ -26,10 +28,10 @@ export class HomeComponent implements OnInit {
     constructor(private db: AngularFireDatabase,
                 private activeModal: NgbActiveModal,
                 private modalService: NgbModal,
-                private af:AngularFireAuth,
+                private af: AngularFireAuth,
                 private router: Router) {
-        af.auth.onAuthStateChanged((user)=>{
-            if(!user){
+        af.auth.onAuthStateChanged((user) => {
+            if (!user) {
                 this.router.navigate(['login'])
             }
         })
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
         this.deudores = this.db.list('deudores');
         this.deudores.subscribe((result: any) => {
             this.deudorTemporal = [];
+            this.deudor = [];
             this.totalDeudas = 0;
             this.totalAbonos = 0;
             this.totalNeto = 0;
@@ -48,7 +51,7 @@ export class HomeComponent implements OnInit {
                 this.totalDeudas += result[i].totalDeuda;
                 this.totalAbonos += result[i].totalAbono;
 
-                if (result[i].estado == "deuda" || result[i].estado == "Deuda") {
+                if (result[i].estado.toLowerCase() == "deuda") {
                     this.deudorTemporal.push(result[i]);
                     this.deudor.push(result[i]);
                 }
@@ -67,16 +70,33 @@ export class HomeComponent implements OnInit {
             backdrop: 'static',
             keyboard: false,
             size: "lg"
-        })
+        });
         modalRef.componentInstance.keyDebt = keyDebt;
     }
 
-    openAddDebtor(){
+    openAddDebtor() {
         this.modalService.open(AgregarDeudorComponent, {
             backdrop: 'static',
             keyboard: false,
             size: "lg"
-        })
+        });
+    }
+
+    openEditName(deptorKey: string) {
+        this.modalService.open(AuthToChangeNameComponent, {
+            backdrop: 'static',
+            keyboard: false,
+            size: "lg"
+        }).result.then(response => {
+            if (response) {
+                const modalRef = this.modalService.open(EditarNombreComponent, {
+                    backdrop: 'static',
+                    keyboard: false,
+                    size: "lg"
+                });
+                modalRef.componentInstance.debtorKey = deptorKey;
+            }
+        });
     }
 
     // // buscador

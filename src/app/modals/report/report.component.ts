@@ -34,7 +34,9 @@ export class ReportComponent implements OnInit {
         Nombre: 'Nombre',
         Direccion: 'Direccion',
         Superficie: 'Superficie',
+        Estado: 'Estado',
         Deuda: 'Deuda',
+        Mensualidad: 'Mensualidad',
         ProximoPago: 'Proximo Pago',
         FechaPago: 'Fecha de Pago'
 
@@ -55,6 +57,7 @@ export class ReportComponent implements OnInit {
                             superficie: result[i].superficie,
                             estado: 'Deuda',
                             totalDeuda: "$" + result[i].totalDeuda,
+                            mensualidad: "$" + result[i].abonos,
                             ProximoPago: "$" + result[i].proximoPago,
                             FechaPago: result[i].proximoVencimiento
                         });

@@ -11,5 +11,6 @@ export interface Debtor {
     tipoPlazos:number,
     numeroPlazos:number,
     proximoPago:number,
-    proximoVencimiento:string
+    proximoVencimiento:string,
+    abonos?:number
 }

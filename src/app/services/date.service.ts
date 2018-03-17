@@ -37,4 +37,16 @@ export class DateService {
         let year = date.getUTCFullYear();
         return (year + '' + month + '' + day);
     }
+
+    static getDateNumber(): string {
+        let date = new Date();
+        let dateNumber: string;
+        dateNumber = date.getFullYear().toString();
+        dateNumber += ("0" + (date.getMonth() + 1).toString()).slice(-2);
+        dateNumber += ("0" + (date.getDate().toString())).slice(-2);
+        dateNumber += ("0" + (date.getHours().toString())).slice(-2);
+        dateNumber += ("0" + (date.getMinutes().toString())).slice(-2);
+
+        return dateNumber;
+    }
 }

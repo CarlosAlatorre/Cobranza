@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Debtor} from '../../interfaces/debtor'
 import {AngularFireDatabase} from "angularfire2/database";
@@ -20,11 +20,14 @@ export class AgregarDeudorComponent {
     fechaVencimiento: Date;
     plazoDePago: number = Plazos.semanal;
     Plazos: any = Plazos;
-    anticipo:number;
+    anticipo: number;
+    fijarAbonos: boolean = false;
+
+    @ViewChild('abono') abono: ElementRef;
 
     constructor(private activeModal: NgbActiveModal,
                 private db: AngularFireDatabase,
-                private  alertService: alertService,
+                private alertService: alertService,
                 private debtorService: DebtService,
                 private dateService: DateService) {
     }
@@ -35,7 +38,10 @@ export class AgregarDeudorComponent {
         if (!this.errorInFields()) {
             this.fillRemainingFields();
 
-            this.debtorService.setDebt(this.debtor);
+            this.debtorService.setDebt(this.debtor)
+                .then((debtorKey: string) => {
+                    this.debtorService.setBond(debtorKey, this.anticipo);
+                })
 
             this.activeModal.dismiss();
         } else {
@@ -43,10 +49,10 @@ export class AgregarDeudorComponent {
         }
     }
 
-    fillRemainingFields(){
-        let vencimientoFinal:string = new Date().toString();
-        for(let i = 0; i < this.debtor.numeroPlazos; i++){
-            vencimientoFinal  = DebtService.getNextExpiration(this.debtor.tipoPlazos, vencimientoFinal);
+    fillRemainingFields() {
+        let vencimientoFinal: string = new Date().toString();
+        for (let i = 0; i < this.debtor.numeroPlazos; i++) {
+            vencimientoFinal = DebtService.getNextExpiration(this.debtor.tipoPlazos, vencimientoFinal);
         }
         this.debtor.vencimiento = vencimientoFinal;
         this.debtor.fechaInicio = new Date().toString();
@@ -57,6 +63,18 @@ export class AgregarDeudorComponent {
         this.debtor.proximoVencimiento = DebtService.getNextExpiration(this.debtor.tipoPlazos, this.debtor.fechaInicio);
         this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
         this.printTicket(this.debtor.nombre, this.anticipo, this.debtor.totalDeuda + this.anticipo, this.debtor.totalDeuda, this.debtor.vencimiento, this.debtor.proximoVencimiento, this.debtor.proximoPago)
+    }
+
+    getNextPay(numeroPlazos: number, totalDeuda: number) {
+        if (!this.fijarAbonos)
+            this.debtor.abonos = totalDeuda / numeroPlazos;
+    }
+
+    focusToPayBond() {
+        if (this.fijarAbonos)
+            setTimeout(() => {
+                this.abono.nativeElement.focus();
+            }, 100)
     }
 
     errorInFields() {
@@ -85,8 +103,8 @@ export class AgregarDeudorComponent {
         return isError;
     }
 
-    printTicket(nombreDeudor:string, abono:number, deuda:number, totalDeber:number, vencimiento:string, proximoVencimiento:string, proximoPago:number) {
-        if(deuda == abono){
+    printTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string, proximoVencimiento: string, proximoPago: number) {
+        if (deuda == abono) {
             proximoVencimiento = "PAGADO";
             proximoPago = 0;
             totalDeber = 0;

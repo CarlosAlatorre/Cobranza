@@ -44,8 +44,18 @@ export class DebtService {
             })
     }
 
-    setDebt(deptor: Debtor) {
-        this.db.list('deudores').push(deptor);
+    setDebt(deptor: Debtor): Promise<string> {
+        return new Promise(resolve => {
+            let debtorKey: string = this.db.list('deudores').push(deptor).key;
+            resolve(debtorKey);
+        })
+    }
+
+    setBond(debtorKey: string, bond: number) {
+        this.db.list('abonos/' + debtorKey).push({
+            fechaAbono: DateService.getDateNumber(),
+            abono: bond
+        })
     }
 
     static getNextPay(numberTerms: number, totalDebt: number) {

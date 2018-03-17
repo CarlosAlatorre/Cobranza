@@ -62,6 +62,7 @@ export class AgregarDeudorComponent {
         this.debtor.totalDeuda = this.debtor.totalDeuda - this.anticipo;
         this.debtor.proximoVencimiento = DebtService.getNextExpiration(this.debtor.tipoPlazos, this.debtor.fechaInicio);
         this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
+        this.debtor.superficie = this.debtor.superficie + ' m2';
         this.printTicket(this.debtor.nombre, this.anticipo, this.debtor.totalDeuda + this.anticipo, this.debtor.totalDeuda, this.debtor.vencimiento, this.debtor.proximoVencimiento, this.debtor.proximoPago)
     }
 

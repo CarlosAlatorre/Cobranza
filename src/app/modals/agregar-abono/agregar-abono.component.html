@@ -42,19 +42,19 @@
                 <div class="row rowInfoStyle">
                     <div class="col-12">
                         <span style="font-size: 18px"> <strong>Numero de abono:</strong></span>
-                        <span style="font-size: 15px">5 </span>
+                        <span style="font-size: 15px">{{ abonos.length + 1 }} </span>
                     </div>
                 </div>
                 <div class="row rowInfoStyle">
                     <div class="col-12">
                         <span style="font-size: 18px"> <strong>Mensualidad:</strong></span>
-                        <span style="font-size: 15px">$1000 </span>
+                        <span style="font-size: 15px"> ${{ userTemp.abonos }} </span>
                     </div>
                 </div>
                 <div class="row rowInfoStyle">
                     <div class="col-12">
                         <span style="font-size: 18px"> <strong>Fecha ultimo abono:</strong></span>
-                        <span style="font-size: 15px">{{userTemp.vencimiento}} </span>
+                        <span style="font-size: 15px">{{ fechaUltimoAbono }} </span>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <div class="row mt-20">
                     <div class="col-12">
                         <span style="font-size: 18px"> <strong>Total a deber:</strong></span>
-                        <div style="font-size: 15px">${{userTemp.totalDeuda}} </div>
+                        <div style="font-size: 15px">${{userTemp.totalDeuda}}</div>
                     </div>
                 </div>
                 <div class="row m-t-10">
@@ -71,9 +71,10 @@
                 <div class="row m-t-15">
                     <div class="col-10">
 
-                        <div  class="form-group inputFieldStyle">
+                        <div class="form-group inputFieldStyle">
                             <span style="font-size: 18px"> <strong>Ingresar abono:</strong></span>
-                            <input  class="form-control form-control-line" placeholder="Ingrese la cantidad" type="number"
+                            <input class="form-control form-control-line" placeholder="Ingrese la cantidad"
+                                   type="number"
                                    #abono (keyup.enter)="confirmarAbono(abono.value)" autofocus max="5"
                             >
 

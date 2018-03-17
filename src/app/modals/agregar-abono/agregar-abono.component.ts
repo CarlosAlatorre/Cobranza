@@ -18,6 +18,8 @@ export class AgregarAbonoComponent implements OnInit {
     userTemp: any;
     confirmDeposit: boolean = false;
     abonoAcumulado: number;
+    abonos: any[] = [];
+    fechaUltimoAbono:string = '';
 
     constructor(private activeModal: NgbActiveModal,
                 private debtService: DebtService,
@@ -33,6 +35,12 @@ export class AgregarAbonoComponent implements OnInit {
             console.log("abono actual: ", this.userTemp.totalAbono);
         })
 
+        this.debtService.getBonds(this.keyDebt)
+            .then((response: any[]) => {
+                this.abonos = response;
+                this.fechaUltimoAbono = this.abonos[this.abonos.length-1].fechaAbono;
+            })
+
     }
 
     closeModal() {
@@ -42,7 +50,7 @@ export class AgregarAbonoComponent implements OnInit {
     agregarAbono(cantidad: number) {
         let totalDeudaNeta: number = this.userTemp.totalDeuda;
         this.debtService.updateDebt(this.keyDebt, totalDeudaNeta - cantidad, this.abonoAcumulado, this.userTemp.proximoVencimiento);
-
+        this.debtService.setBond(this.keyDebt, cantidad);
     }
 
     confirmarAbono(abono: string) {
@@ -75,8 +83,8 @@ export class AgregarAbonoComponent implements OnInit {
         this.activeModal.close();
     }
 
-    printTicket(nombreDeudor:string, abono:number, deuda:number, totalDeber:number, vencimiento:string, proximoVencimiento:string, proximoPago:number) {
-        if(deuda == abono){
+    printTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string, proximoVencimiento: string, proximoPago: number) {
+        if (deuda == abono) {
             proximoVencimiento = "PAGADO";
             proximoPago = 0;
             totalDeber = 0;

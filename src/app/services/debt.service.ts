@@ -58,6 +58,15 @@ export class DebtService {
         })
     }
 
+    getBonds(debtorKey:string): Promise<any>{
+        return new Promise(resolve => {
+            this.db.list('abonos/'+debtorKey)
+                .subscribe((snapshot:any[])=>{
+                    resolve(snapshot);
+                })
+        })
+    }
+
     static getNextPay(numberTerms: number, totalDebt: number) {
         return totalDebt / numberTerms;
     }

@@ -47,6 +47,7 @@ export class ReportComponent implements OnInit {
         Deuda: 'Deuda',
         Mensualidad: 'Mensualidad',
         FechaUltimoPago: 'Fecha Ultimo Pago',
+        ultimoPago: 'Ultimo Pago',
         ProximoPago: 'Proximo Pago',
         FechaPago: 'Fecha de Pago'
 
@@ -65,10 +66,12 @@ export class ReportComponent implements OnInit {
                         .then((bonds: any[]) => {
                             let mensualidades:number = 0;
                             let fechaUltimoPago:string = '';
+                            let ultimoPago:number = 0;
 
                             if(bonds.length > 0){
                                 mensualidades = result[i].abonos;
                                 fechaUltimoPago = bonds[bonds.length-1].fechaAbono;
+                                ultimoPago = bonds[bonds.length-1].abono;
                             }
                             this.arrayDeudores.push(
                                 {
@@ -79,11 +82,12 @@ export class ReportComponent implements OnInit {
                                     totalDeuda: "$" + result[i].totalDeuda,
                                     mensualidad: "$" + mensualidades,
                                     fechaUltimoPago: fechaUltimoPago,
+                                    ultimoPago: ultimoPago,
                                     ProximoPago: "$" + result[i].proximoPago,
                                     FechaPago: result[i].proximoVencimiento
                                 });
+                            console.log(this.arrayDeudores);
                         })
-                    console.log(this.arrayDeudores);
                 }
             }
         })

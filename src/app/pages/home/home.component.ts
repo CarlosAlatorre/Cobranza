@@ -11,6 +11,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 import {Router} from "@angular/router";
 import {EditarNombreComponent} from "../../modals/editar-nombre/editar-nombre.component";
 import {AuthToChangeNameComponent} from "../../modals/auth-to-change-name/auth-to-change-name.component";
+import {HistorialAbonosComponent} from "../../modals/historial-abonos/historial-abonos.component";
 
 @Component({
     selector: 'app-home',
@@ -97,6 +98,15 @@ export class HomeComponent implements OnInit {
                 modalRef.componentInstance.debtorKey = deptorKey;
             }
         });
+    }
+
+    openBondHistory(debtorKey:string){
+        const modalRef = this.modalService.open(HistorialAbonosComponent, {
+            backdrop: 'static',
+            keyboard: false,
+            size: "lg"
+        });
+        modalRef.componentInstance.debtorKey = debtorKey;
     }
 
     // // buscador

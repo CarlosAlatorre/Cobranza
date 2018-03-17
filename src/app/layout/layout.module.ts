@@ -31,6 +31,7 @@ import {ValidationService} from "../services/validation.service";
 import {AuthToChangeNameComponent} from "../modals/auth-to-change-name/auth-to-change-name.component";
 import {AuthService} from "../services/auth.service";
 import {SharedModule} from "../shared/shared.module";
+import {HistorialAbonosComponent} from "../modals/historial-abonos/historial-abonos.component";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -50,7 +51,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ReportComponent,
         ConfirmarAbonoComponent,
         EditarNombreComponent,
-        AuthToChangeNameComponent
+        AuthToChangeNameComponent,
+        HistorialAbonosComponent
     ],
     imports: [
         CommonModule,
@@ -83,7 +85,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ConfirmarAbonoComponent,
         AgregarDeudorComponent,
         EditarNombreComponent,
-        AuthToChangeNameComponent
+        AuthToChangeNameComponent,
+        HistorialAbonosComponent
     ]
 })
 

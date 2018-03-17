@@ -58,10 +58,19 @@ export class DebtService {
         })
     }
 
-    getBonds(debtorKey:string): Promise<any>{
+    getBonds(debtorKey: string): Promise<any[]> {
         return new Promise(resolve => {
-            this.db.list('abonos/'+debtorKey)
-                .subscribe((snapshot:any[])=>{
+            this.db.list('abonos/' + debtorKey)
+                .subscribe((snapshot: any[]) => {
+                    resolve(snapshot);
+                })
+        })
+    }
+
+    getAllBonds(): Promise<any[]> {
+        return new Promise(resolve => {
+            this.db.list('abonos')
+                .subscribe((snapshot: any[]) => {
                     resolve(snapshot);
                 })
         })

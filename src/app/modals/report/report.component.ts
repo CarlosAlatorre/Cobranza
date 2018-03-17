@@ -53,6 +53,7 @@ export class ReportComponent implements OnInit {
                             nombre: result[i].nombre,
                             direccion: result[i].domicilio,
                             superficie: result[i].superficie,
+                            estado: 'Deuda',
                             totalDeuda: "$" + result[i].totalDeuda,
                             ProximoPago: "$" + result[i].proximoPago,
                             FechaPago: result[i].proximoVencimiento

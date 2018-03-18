@@ -19,7 +19,7 @@ export class AgregarAbonoComponent implements OnInit {
     confirmDeposit: boolean = false;
     abonoAcumulado: number;
     abonos: any[] = [];
-    fechaUltimoAbono:string = '';
+    fechaUltimoAbono: string = '';
 
     constructor(private activeModal: NgbActiveModal,
                 private debtService: DebtService,
@@ -38,7 +38,7 @@ export class AgregarAbonoComponent implements OnInit {
         this.debtService.getBonds(this.keyDebt)
             .then((response: any[]) => {
                 this.abonos = response;
-                this.fechaUltimoAbono = this.abonos[this.abonos.length-1].fechaAbono;
+                this.fechaUltimoAbono = this.abonos[this.abonos.length - 1].fechaAbono;
             })
 
     }
@@ -64,13 +64,24 @@ export class AgregarAbonoComponent implements OnInit {
                 this.alertService.error('La cantidad ingresada es mayor a la deuda', '');
             } else {
                 this.alertService.confirm("¿Desea confirmar transacción?", "").then((response) => {
-                    this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
-                    this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
-                    this.agregarAbono(deposit);
-                    this.alertService.success("Abono agregado", "");
-                    this.closeModal();
-                }).catch((reject) => {
 
+                    //Verificar si añadir un plazo más para el pago o no
+                    if (DebtService.isNextExpiration(this.userTemp.proximoVencimiento)) {
+                        this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
+                    } else {
+                        this.alertService.confirmQuetion('Siguiente abono hasta ' + this.userTemp.proximoVencimiento, '¿Desea que el siguiente abono sea en esta fecha o quiere añadir un plazo más?')
+                            .then((response: boolean) => {
+                                if (!response)
+                                    this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
+
+                                this.userTemp.proximoPago = DebtService.getNextPay(this.userTemp.vencimiento, this.userTemp.totalDeuda - deposit, this.userTemp.tipoPlazos)
+                                this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
+                                this.agregarAbono(deposit);
+                                this.alertService.success("Abono agregado", "");
+                                this.closeModal();
+                            })
+                    }
+                }).catch((reject) => {
                 })
             }
         }
@@ -199,7 +210,7 @@ img {
       <tbody>
         <tr>
           <td class="producto">${proximoVencimiento}</td>
-          <td class="precio">${proximoPago}</td>
+          <td class="precio">${proximoPago.toFixed(2)}</td>
         </tr>
       </tbody>
 </table>

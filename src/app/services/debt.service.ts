@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {Debtor} from "../interfaces/debtor";
 import {DateService} from "./date.service";
 import {Plazos} from "../enums/plazos.enum";
+import {DateDiff} from "./date-diff.service";
 
 @Injectable()
 export class DebtService {
@@ -76,8 +77,24 @@ export class DebtService {
         })
     }
 
-    static getNextPay(numberTerms: number, totalDebt: number) {
-        return totalDebt / numberTerms;
+    static getNextPay(expiration: string, currentDebt: number, typeOfPay: number): number {
+        let currentDate: Date = new Date(DateService.getDateFormat((new Date()).toString()));
+        let numberPayments: number = 1;
+
+        switch (typeOfPay) {
+            case Plazos.semanal:
+                numberPayments = DateDiff.inWeeks(currentDate, new Date(expiration));
+                break;
+
+            case Plazos.quincenal:
+                numberPayments = DateDiff.inFortnight(currentDate, new Date(expiration));
+                break;
+
+            case Plazos.mensual:
+                numberPayments = DateDiff.inMonths(currentDate, new Date(expiration));
+                break;
+        }
+        return currentDebt / numberPayments;
     }
 
     static getNextExpiration(typeTerm: number, initialDate: string) {
@@ -97,9 +114,17 @@ export class DebtService {
                 nextExpiration = DateService.getNextMonth(initialDate);
                 break;
         }
-
+        debugger
         return DateService.getDateFormat(nextExpiration);
     }
 
+    static isNextExpiration(DateForNextPay: string): boolean {
+        let currentDate = new Date(DateService.getDateFormat((new Date()).toString()));
+        let DateNextPay = new Date(DateForNextPay + ' 00:00');
+
+        let timeForExpiration = DateDiff.inDays(currentDate, DateNextPay);
+
+        return timeForExpiration < 0;
+    }
 
 }

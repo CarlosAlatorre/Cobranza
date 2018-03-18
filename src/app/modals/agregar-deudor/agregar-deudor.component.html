@@ -22,8 +22,14 @@
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
                     <div class="form-group">
-                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;"
-                               [(ngModel)]="debtor.totalDeuda" name="e" placeholder="0.00">
+                        <input type="number"
+                               class="form-control p-l-0"
+                               style="border-bottom: 1px solid #e0e0e0;"
+                               [(ngModel)]="debtor.totalDeuda"
+                               name="e"
+                               placeholder="0.00"
+                               (keyup)="getNextPay(debtor.numeroPlazos, debtor.totalDeuda)"
+                        >
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -34,8 +40,14 @@
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
                     <div class="form-group">
-                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;"
-                               [(ngModel)]="anticipo" name="e" placeholder="0.00">
+                        <input type="number"
+                               class="form-control p-l-0"
+                               style="border-bottom: 1px solid #e0e0e0;"
+                               [(ngModel)]="anticipo"
+                               name="e"
+                               placeholder="0.00"
+                               (keyup)="getNextPay(debtor.numeroPlazos, debtor.totalDeuda)"
+                        >
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -111,10 +123,11 @@
 
         <div class="row m-t-20">
             <div class="offset-1 col-6 p-l-0">
-                <div>Pagos {{ plazoDePago == Plazos.mensual ? 'Mensual' : plazoDePago == Plazos.quincenal ? 'Quincenal'
-                    : plazoDePago == Plazos.semanal ? 'Semanal' : '' }}
+                <div>Abonos {{ plazoDePago == Plazos.mensual ? 'Mensuales' : plazoDePago == Plazos.quincenal ? 'Quincenales'
+                    : plazoDePago == Plazos.semanal ? 'Semanales' : '' }}
                 </div>
                 <div class="input-group">
+                    <span class="input-group-addon">$</span>
                     <div class="form-group">
                         <input type="number"
                                class="form-control p-l-0"

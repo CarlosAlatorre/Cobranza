@@ -7,18 +7,21 @@ export class DateService {
     }
 
     static getNextWeek(previusDate: string) {
+        previusDate = previusDate + ' 00:00'
         let date: Date = new Date(previusDate);
         date.setDate(date.getDate() + 7);
         return date.toDateString();
     }
 
     static getNextMonth(previusDate: string) {
+        previusDate = previusDate + ' 00:00'
         let date: Date = new Date(previusDate);
         date.setMonth(date.getMonth() + 1);
         return date.toDateString();
     }
 
     static getNextFortnight(previusDate: string) {
+        previusDate = previusDate + ' 00:00'
         let date: Date = new Date(previusDate);
         date.setDate(date.getDate() + 15);
         return date.toDateString();

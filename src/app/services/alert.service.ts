@@ -9,43 +9,46 @@ export class alertService {
     constructor() {
     }
 
-    error(title:string, message:string){
+    error(title: string, message: string) {
         swal(
             title,
             message,
             'error'
         )
     }
-    success(title:string, message:string){
+
+    success(title: string, message: string) {
         swal(
             title,
             message,
             'success'
         )
     }
-    infoTerms(title:string) {
-       return new Promise((resolve =>{
-           swal({
-               title: title,
-               type: 'info',
-               html:
-               ' <div style="height: 500px; overflow-y: auto">' +
-               '<p>.kjbñjboho</p>' +
-               '<p>.kjbñjboho</p>' +
-               '<p>.kjbñjboho</p>' +
-               '<p>.kjbñjboho</p>' +
-               '<p>.kjbñjboho</p>' +
-               '</div> '
-               ,
-               showCloseButton: true,
-               confirmButtonText:
-                   '<i class="fa fa-thumbs-up"></i> Acepto'
-           }).then(function () {
-               resolve();
-           })
-       }))
+
+    infoTerms(title: string) {
+        return new Promise((resolve => {
+            swal({
+                title: title,
+                type: 'info',
+                html:
+                ' <div style="height: 500px; overflow-y: auto">' +
+                '<p>.kjbñjboho</p>' +
+                '<p>.kjbñjboho</p>' +
+                '<p>.kjbñjboho</p>' +
+                '<p>.kjbñjboho</p>' +
+                '<p>.kjbñjboho</p>' +
+                '</div> '
+                ,
+                showCloseButton: true,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Acepto'
+            }).then(function () {
+                resolve();
+            })
+        }))
     }
-    confirmError(title:string, message:string) {
+
+    confirmError(title: string, message: string) {
 
         return new Promise((resolve => {
 
@@ -63,7 +66,7 @@ export class alertService {
 
     }
 
-    confirmSuccess(title:string, message:string){
+    confirmSuccess(title: string, message: string) {
         return new Promise((resolve => {
 
             swal({
@@ -79,8 +82,8 @@ export class alertService {
         }))
     }
 
-    confirm(title:string, message:string){
-        return new Promise(((resolve, reject )=> {
+    confirm(title: string, message: string) {
+        return new Promise(((resolve, reject) => {
 
             swal({
                 title: title,
@@ -89,25 +92,50 @@ export class alertService {
                 showCancelButton: true,
                 confirmButtonColor: '#2ecc71',
                 confirmButtonText: 'Si',
-                cancelButtonColor:'#e74c3c',
-                cancelButtonText:'No'
+                cancelButtonColor: '#e74c3c',
+                cancelButtonText: 'No'
+            })
+                .then(function (result) {
+                    if (result) {
+                        resolve();
+                    }
+                })
+                .catch(error => {
+                    reject();
+                })
+
+        }))
+    }
+
+    confirmQuetion(title: string, message: string) {
+        return new Promise(((resolve) => {
+
+            swal({
+                title: title,
+                text: message,
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#2ecc71',
+                confirmButtonText: 'Si, dejar esta fecha',
+                cancelButtonColor: '#e74c3c',
+                cancelButtonText: 'No, añadir un plazo más'
             }).then(function (result) {
                 if (result) {
-                    resolve();
-                } else {
-                    reject();
+                    resolve(true);
                 }
+            }).catch(error => {
+                resolve(false);
             })
 
         }))
     }
 
-    showError(code:string){
+    showError(code: string) {
 
-        let title:string;
-        let message:string;
+        let title: string;
+        let message: string;
 
-        switch(code){
+        switch (code) {
 
             case 'auth/invalid-email':
                 title = "Email Invalido";

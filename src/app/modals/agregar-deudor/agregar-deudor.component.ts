@@ -50,25 +50,27 @@ export class AgregarDeudorComponent {
     }
 
     fillRemainingFields() {
-        let vencimientoFinal: string = new Date().toString();
+        let vencimientoFinal: string = DateService.getDateFormat((new Date()).toString());
+        this.debtor.tipoPlazos = this.plazoDePago;
+        // Get the last expiration
         for (let i = 0; i < this.debtor.numeroPlazos; i++) {
             vencimientoFinal = DebtService.getNextExpiration(this.debtor.tipoPlazos, vencimientoFinal);
         }
         this.debtor.vencimiento = vencimientoFinal;
-        this.debtor.fechaInicio = new Date().toString();
+        this.debtor.fechaInicio = DateService.getDateFormat((new Date()).toString());
         this.debtor.estado = "Deuda";
         this.debtor.totalAbono = this.anticipo;
-        this.debtor.tipoPlazos = this.plazoDePago;
         this.debtor.totalDeuda = this.debtor.totalDeuda - this.anticipo;
         this.debtor.proximoVencimiento = DebtService.getNextExpiration(this.debtor.tipoPlazos, this.debtor.fechaInicio);
-        this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
+        // this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
+        this.debtor.proximoPago = this.debtor.abonos;
         this.debtor.superficie = this.debtor.superficie + ' m2';
         this.printTicket(this.debtor.nombre, this.anticipo, this.debtor.totalDeuda + this.anticipo, this.debtor.totalDeuda, this.debtor.vencimiento, this.debtor.proximoVencimiento, this.debtor.proximoPago)
     }
 
     getNextPay(numeroPlazos: number, totalDeuda: number) {
         if (!this.fijarAbonos)
-            this.debtor.abonos = totalDeuda / numeroPlazos;
+            this.debtor.abonos = ((totalDeuda ? totalDeuda : 0) - (this.anticipo ? this.anticipo : 0)) / (numeroPlazos ? numeroPlazos : 1);
     }
 
     focusToPayBond() {

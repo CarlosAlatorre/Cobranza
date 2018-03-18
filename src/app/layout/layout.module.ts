@@ -32,6 +32,7 @@ import {AuthToChangeNameComponent} from "../modals/auth-to-change-name/auth-to-c
 import {AuthService} from "../services/auth.service";
 import {SharedModule} from "../shared/shared.module";
 import {HistorialAbonosComponent} from "../modals/historial-abonos/historial-abonos.component";
+import {DateDiff} from "../services/date-diff.service";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -76,7 +77,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DateService,
         DeudoresService,
         ValidationService,
-        AuthService
+        AuthService,
+        DateDiff
     ],
     entryComponents:[
         HistorialComponent,

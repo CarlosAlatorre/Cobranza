@@ -17,6 +17,7 @@ import {alertService} from "./services/alert.service";
 import { EditarNombreComponent } from './modals/editar-nombre/editar-nombre.component';
 import { AuthToChangeNameComponent } from './modals/auth-to-change-name/auth-to-change-name.component';
 import { HistorialAbonosComponent } from './modals/historial-abonos/historial-abonos.component';
+import { CambiarFechaAbonoComponent } from './modals/cambiar-fecha-abono/cambiar-fecha-abono.component';
 
 
 

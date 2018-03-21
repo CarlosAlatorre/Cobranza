@@ -115,8 +115,8 @@ export class AgregarDeudorComponent {
             proximoPago = 0;
             totalDeber = 0;
         }
-        let mywindow = window.open('', 'PRINT', 'height=450,width=300');
         let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+        let mywindow = window.open('', 'PRINT', 'height=450,width=300');
 
         mywindow.document.write('<html><head>');
         mywindow.document.write(` <style>
@@ -190,7 +190,8 @@ img {
     <br>
       <br>${nombreDeudor}
       <br>
-      <!--Vencimiento final: ${ currentDate }</p>-->
+      <p>${ currentDate }</p>
+      </p>
       <br>
     <table>
       <thead>
@@ -234,9 +235,9 @@ img {
     <p class="centrado">¡QUE TENGA BUEN DÍA!
       <br><br><br></p>
     <br>
-    <br>
-    <br>
-    <br>
+    <!--<br>-->
+    <!--<br>-->
+    <!--<br>-->
     <button class="oculto-impresion" onclick="imprimir()">Imprimir Ticket</button>
     <br>
     <br>

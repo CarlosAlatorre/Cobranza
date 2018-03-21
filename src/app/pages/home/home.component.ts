@@ -137,8 +137,8 @@ export class HomeComponent implements OnInit {
 
     isExpired(expiration:string){
 
-        let numberExpiration:number = toInteger(expiration.replace('-', ''));
-        let currentDate:number = toInteger(DateService.getDateNumber().replace('-', ''));
+        let numberExpiration:number = parseInt(expiration.replace(/-/g, ''));
+        let currentDate:number = parseInt(DateService.getDateNumber().replace(/-/g, ''));
 
         return numberExpiration < currentDate;
     }

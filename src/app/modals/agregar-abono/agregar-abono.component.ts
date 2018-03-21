@@ -8,6 +8,8 @@ import {alertService} from "../../services/alert.service";
 import {Plazos} from "../../enums/plazos.enum";
 import {TypeDate} from "../../enums/type-date.enum";
 import {DateService} from "../../services/date.service";
+import {AuthToChangeNameComponent} from "../auth-to-change-name/auth-to-change-name.component";
+import {CambiarFechaAbonoComponent} from "../cambiar-fecha-abono/cambiar-fecha-abono.component";
 
 
 @Component({
@@ -66,29 +68,55 @@ export class AgregarAbonoComponent implements OnInit {
             if (this.userTemp.totalDeuda < deposit) {
                 this.alertService.error('La cantidad ingresada es mayor a la deuda', '');
             } else {
-                this.alertService.confirm("¿Desea confirmar transacción?", "").then((response) => {
+                // this.alertService.confirm("¿Desea confirmar transacción?", "").then((response) => {
 
-                    //Verificar si añadir un plazo más para el pago o no
-                    if (DebtService.isNextExpiration(this.userTemp.proximoVencimiento)) {
-                        this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
-                    } else {
-                        this.alertService.confirmQuetion('Siguiente abono hasta ' + this.userTemp.proximoVencimiento,
-                            '¿Desea que el siguiente abono sea en esta fecha o quiere añadir ' + (this.userTemp.tipoPlazos == Plazos.semanal ? 'una semana' : this.userTemp.tipoPlazos == Plazos.quincenal ? 'una quincena' : 'un mes' ) + ' más?')
-                            .then((response: boolean) => {
-                                if (!response)
-                                    this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
+                //Verificar si añadir un plazo más para el pago o no
+                // if (DebtService.isNextExpiration(this.userTemp.proximoVencimiento)) {
+                //     this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
+                //
+                //     this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
+                //     this.agregarAbono(deposit);
+                //     this.alertService.success("Abono agregado", "");
+                //     this.closeModal();
+                // } else {
+                this.alertService.confirmQuetion('Siguiente abono hasta ' + this.userTemp.proximoVencimiento,
+                    '¿Desea que el siguiente abono sea en esta fecha o quiere cambiar la fecha?')
+                    .then((response: boolean) => {
 
-                                // TODO: Verificar si dejar o quitar esta opcion
-                                // this.userTemp.proximoPago = DebtService.getNextPay(this.userTemp.vencimiento, this.userTemp.totalDeuda - deposit, this.userTemp.tipoPlazos)
+                        //Cambiara fecha
+                        if (!response) {
+                            const modalRef = this.modalService.open(CambiarFechaAbonoComponent, {
+                                backdrop: 'static',
+                                keyboard: false,
+                                size: "lg"
+                            })
+
+                            modalRef.result.then((response: any) => {
+                                if (response)
+                                    this.userTemp.proximoVencimiento = response;
 
                                 this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
                                 this.agregarAbono(deposit);
                                 this.alertService.success("Abono agregado", "");
                                 this.closeModal();
                             })
-                    }
-                }).catch((reject) => {
-                })
+
+                            modalRef.componentInstance.previusDate = this.userTemp.proximoVencimiento;
+
+                        } else {
+                            //Dejar misma fecha
+                            this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
+                            this.agregarAbono(deposit);
+                            this.alertService.success("Abono agregado", "");
+                            this.closeModal();
+                        }
+
+                        // TODO: Verificar si dejar o quitar esta opcion
+                        // this.userTemp.proximoPago = DebtService.getNextPay(this.userTemp.vencimiento, this.userTemp.totalDeuda - deposit, this.userTemp.tipoPlazos)
+
+                    })
+                // }
+                // }).catch((reject) => {})
             }
         }
     }
@@ -106,8 +134,8 @@ export class AgregarAbonoComponent implements OnInit {
             proximoPago = 0;
             totalDeber = 0;
         }
-        let mywindow = window.open('', 'PRINT', 'height=450,width=300');
         let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+        let mywindow = window.open('', 'PRINT', 'height=450,width=300');
 
         mywindow.document.write('<html><head>');
         mywindow.document.write(` <style>
@@ -182,7 +210,7 @@ img {
       <br>${nombreDeudor}
       <br>
       <p align="center">${ currentDate }</p>
-      <br>
+      <!--<br>-->
     <table>
       <thead>
         <tr>
@@ -225,9 +253,9 @@ img {
     <p class="centrado">¡QUE TENGA BUEN DÍA!
       <br><br><br></p>
     <br>
-    <br>
-    <br>
-    <br>
+    <!--<br>-->
+    <!--<br>-->
+    <!--<br>-->
     <button class="oculto-impresion" onclick="imprimir()">Imprimir Ticket</button>
     <br>
     <br>

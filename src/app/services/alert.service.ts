@@ -116,9 +116,9 @@ export class alertService {
                 type: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#2ecc71',
-                confirmButtonText: 'Si, dejar esta fecha',
+                confirmButtonText: 'Dejar esta fecha',
                 cancelButtonColor: '#e74c3c',
-                cancelButtonText: 'No, añadir un plazo más'
+                cancelButtonText: 'Cambiar fecha'
             }).then(function (result) {
                 if (result) {
                     resolve(true);

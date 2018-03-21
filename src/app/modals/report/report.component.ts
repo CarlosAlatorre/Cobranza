@@ -69,7 +69,6 @@ export class ReportComponent implements OnInit {
                             let ultimoPago:number = 0;
 
                             if(bonds.length > 0){
-                                mensualidades = result[i].abonos;
                                 fechaUltimoPago = bonds[bonds.length-1].fechaAbono;
                                 ultimoPago = bonds[bonds.length-1].abono;
                             }
@@ -80,7 +79,7 @@ export class ReportComponent implements OnInit {
                                     superficie: result[i].superficie,
                                     estado: 'Deuda',
                                     totalDeuda: "$" + result[i].totalDeuda,
-                                    mensualidad: "$" + mensualidades,
+                                    mensualidad: "$" + result[i].proximoPago,
                                     fechaUltimoPago: fechaUltimoPago,
                                     ultimoPago: ultimoPago,
                                     ProximoPago: "$" + result[i].proximoPago,

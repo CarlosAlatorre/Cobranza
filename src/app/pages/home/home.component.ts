@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 import {EditarNombreComponent} from "../../modals/editar-nombre/editar-nombre.component";
 import {AuthToChangeNameComponent} from "../../modals/auth-to-change-name/auth-to-change-name.component";
 import {HistorialAbonosComponent} from "../../modals/historial-abonos/historial-abonos.component";
+import {DateService} from "../../services/date.service";
+import {TypeDate} from "../../enums/type-date.enum";
 
 @Component({
     selector: 'app-home',

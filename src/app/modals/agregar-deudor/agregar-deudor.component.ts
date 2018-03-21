@@ -8,6 +8,7 @@ import {Plazos} from "../../enums/plazos.enum";
 import {DebtService} from "../../services/debt.service";
 import {DateService} from "../../services/date.service";
 import {ancestorWhere} from "tslint";
+import {TypeDate} from "../../enums/type-date.enum";
 
 @Component({
     selector: 'app-agregar-deudor',
@@ -62,15 +63,17 @@ export class AgregarDeudorComponent {
         this.debtor.totalAbono = this.anticipo;
         this.debtor.totalDeuda = this.debtor.totalDeuda - this.anticipo;
         this.debtor.proximoVencimiento = DebtService.getNextExpiration(this.debtor.tipoPlazos, this.debtor.fechaInicio);
+
+        //TODO: Verificar si quitar esto
         // this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
-        this.debtor.proximoPago = this.debtor.abonos;
+        // this.debtor.proximoPago = this.debtor.abonos;
         this.debtor.superficie = this.debtor.superficie + ' m2';
         this.printTicket(this.debtor.nombre, this.anticipo, this.debtor.totalDeuda + this.anticipo, this.debtor.totalDeuda, this.debtor.vencimiento, this.debtor.proximoVencimiento, this.debtor.proximoPago)
     }
 
     getNextPay(numeroPlazos: number, totalDeuda: number) {
         if (!this.fijarAbonos)
-            this.debtor.abonos = ((totalDeuda ? totalDeuda : 0) - (this.anticipo ? this.anticipo : 0)) / (numeroPlazos ? numeroPlazos : 1);
+            this.debtor.proximoPago = ((totalDeuda ? totalDeuda : 0) - (this.anticipo ? this.anticipo : 0)) / (numeroPlazos ? numeroPlazos : 1);
     }
 
     focusToPayBond() {
@@ -113,6 +116,7 @@ export class AgregarDeudorComponent {
             totalDeber = 0;
         }
         let mywindow = window.open('', 'PRINT', 'height=450,width=300');
+        let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
 
         mywindow.document.write('<html><head>');
         mywindow.document.write(` <style>
@@ -186,7 +190,7 @@ img {
     <br>
       <br>${nombreDeudor}
       <br>
-      <!--Vencimiento final: ${vencimiento}</p>-->
+      <!--Vencimiento final: ${ currentDate }</p>-->
       <br>
     <table>
       <thead>

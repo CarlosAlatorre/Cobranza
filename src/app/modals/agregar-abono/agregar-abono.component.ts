@@ -5,6 +5,9 @@ import {forEach} from "@angular/router/src/utils/collection";
 import {Observable} from "rxjs/Observable";
 import {ConfirmarAbonoComponent} from "../confirmar-abono/confirmar-abono.component";
 import {alertService} from "../../services/alert.service";
+import {Plazos} from "../../enums/plazos.enum";
+import {TypeDate} from "../../enums/type-date.enum";
+import {DateService} from "../../services/date.service";
 
 
 @Component({
@@ -69,12 +72,15 @@ export class AgregarAbonoComponent implements OnInit {
                     if (DebtService.isNextExpiration(this.userTemp.proximoVencimiento)) {
                         this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
                     } else {
-                        this.alertService.confirmQuetion('Siguiente abono hasta ' + this.userTemp.proximoVencimiento, '¿Desea que el siguiente abono sea en esta fecha o quiere añadir un plazo más?')
+                        this.alertService.confirmQuetion('Siguiente abono hasta ' + this.userTemp.proximoVencimiento,
+                            '¿Desea que el siguiente abono sea en esta fecha o quiere añadir ' + (this.userTemp.tipoPlazos == Plazos.semanal ? 'una semana' : this.userTemp.tipoPlazos == Plazos.quincenal ? 'una quincena' : 'un mes' ) + ' más?')
                             .then((response: boolean) => {
                                 if (!response)
                                     this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
 
-                                this.userTemp.proximoPago = DebtService.getNextPay(this.userTemp.vencimiento, this.userTemp.totalDeuda - deposit, this.userTemp.tipoPlazos)
+                                // TODO: Verificar si dejar o quitar esta opcion
+                                // this.userTemp.proximoPago = DebtService.getNextPay(this.userTemp.vencimiento, this.userTemp.totalDeuda - deposit, this.userTemp.tipoPlazos)
+
                                 this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
                                 this.agregarAbono(deposit);
                                 this.alertService.success("Abono agregado", "");
@@ -101,7 +107,8 @@ export class AgregarAbonoComponent implements OnInit {
             totalDeber = 0;
         }
         let mywindow = window.open('', 'PRINT', 'height=450,width=300');
-
+        let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+debugger
         mywindow.document.write('<html><head>');
         mywindow.document.write(` <style>
 * {
@@ -174,7 +181,7 @@ img {
     <br>
       <br>${nombreDeudor}
       <br>
-      <!--Vencimiento final: ${vencimiento}</p>-->
+      <p align="center">${ currentDate }</p>
       <br>
     <table>
       <thead>

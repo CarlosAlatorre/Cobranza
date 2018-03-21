@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {TypeDate} from "../enums/type-date.enum";
+import {type} from "os";
 
 @Injectable()
 export class DateService {
@@ -49,5 +51,35 @@ export class DateService {
         dateNumber += ("0" + (date.getDate().toString())).slice(-2);
 
         return dateNumber;
+    }
+
+    static getCurrentDate(typeDate: number) {
+
+        let currentDate: Date = new Date();
+        let formatDate: string = '';
+
+        if (typeDate >= TypeDate.YYYY) {
+            formatDate += currentDate.getFullYear();
+        }
+        if (typeDate >= TypeDate.YYYYMM) {
+            formatDate += '-' + ( '0' + ((currentDate.getMonth()+1).toString())).slice(-2);
+        }
+        if (typeDate >= TypeDate.YYYYMMDD) {
+            formatDate += '-' + ( '0' + (currentDate.getDate().toString())).slice(-2);
+        }
+        if (typeDate >= TypeDate.YYYYMMDDHH) {
+            formatDate += ' ' + ( '0' + (currentDate.getHours().toString())).slice(-2);
+        }
+        if (typeDate >= TypeDate.YYYYMMDDHHmm) {
+            formatDate += ':' + ( '0' + (currentDate.getMinutes().toString())).slice(-2);
+        }
+        if (typeDate >= TypeDate.YYYYMMDDHHmmSS) {
+            formatDate += ':' + ( '0' + (currentDate.getSeconds().toString())).slice(-2);
+        }
+        if (typeDate >= TypeDate.YYYYMMDDHHmmSSmm) {
+            formatDate += ':' + ( '00' + (currentDate.getMilliseconds().toString())).slice(-3);
+        }
+
+        return formatDate;
     }
 }

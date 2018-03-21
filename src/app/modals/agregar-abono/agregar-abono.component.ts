@@ -108,7 +108,7 @@ export class AgregarAbonoComponent implements OnInit {
         }
         let mywindow = window.open('', 'PRINT', 'height=450,width=300');
         let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
-debugger
+
         mywindow.document.write('<html><head>');
         mywindow.document.write(` <style>
 * {

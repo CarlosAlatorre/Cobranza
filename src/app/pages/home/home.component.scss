@@ -43,3 +43,22 @@
 .over-flow-y{
   overflow-y: auto;
 }
+
+.expiration{
+  border-radius: 25px 25px 25px 25px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold;
+  width: auto;
+  text-align: center;
+}
+
+.backgroundExpiration-red{
+  background-color: #e74c3c;
+}
+.backgroundExpiration-green{
+  background-color: #2ecc71;
+}

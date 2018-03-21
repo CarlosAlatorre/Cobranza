@@ -14,6 +14,7 @@ import {AuthToChangeNameComponent} from "../../modals/auth-to-change-name/auth-t
 import {HistorialAbonosComponent} from "../../modals/historial-abonos/historial-abonos.component";
 import {DateService} from "../../services/date.service";
 import {TypeDate} from "../../enums/type-date.enum";
+import {toInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
 
 @Component({
     selector: 'app-home',
@@ -132,6 +133,14 @@ export class HomeComponent implements OnInit {
     openReport() {
         // this.modalService.open(ReportComponent, {backdrop: 'static ', keyboard: false, size: "lg"});
         this.modalService.open(ReportComponent, {backdrop: 'static', keyboard: false, size: "lg"});
+    }
+
+    isExpired(expiration:string){
+
+        let numberExpiration:number = toInteger(expiration.replace('-', ''));
+        let currentDate:number = toInteger(DateService.getDateNumber().replace('-', ''));
+
+        return numberExpiration < currentDate;
     }
 
 }

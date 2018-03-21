@@ -69,12 +69,21 @@ export class HomeComponent implements OnInit {
     }
 
     openAddMoney(keyDebt: string) {
-        const modalRef = this.modalService.open(AgregarAbonoComponent, {
+        this.modalService.open(AuthToChangeNameComponent, {
             backdrop: 'static',
             keyboard: false,
             size: "lg"
-        });
-        modalRef.componentInstance.keyDebt = keyDebt;
+        }).result.then(response => {
+            if (response) {
+
+                const modalRef = this.modalService.open(AgregarAbonoComponent, {
+                    backdrop: 'static',
+                    keyboard: false,
+                    size: "lg"
+                });
+                modalRef.componentInstance.keyDebt = keyDebt;
+            }
+        })
     }
 
     openAddDebtor() {
@@ -102,7 +111,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    openBondHistory(debtorKey:string){
+    openBondHistory(debtorKey: string) {
         const modalRef = this.modalService.open(HistorialAbonosComponent, {
             backdrop: 'static',
             keyboard: false,

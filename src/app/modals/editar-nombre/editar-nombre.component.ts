@@ -4,6 +4,8 @@ import {Debtor} from "../../interfaces/debtor";
 import {ValidationService} from "../../services/validation.service";
 import {alertService} from "../../services/alert.service";
 import {NgbActiveModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {isUndefined} from "util";
+import {DebtService} from "../../services/debt.service";
 
 @Component({
     selector: 'app-editar-nombre',
@@ -29,11 +31,10 @@ export class EditarNombreComponent implements OnInit {
         proximoVencimiento: null
     };
 
-    @ViewChild('newName') newName:ElementRef;
-
     constructor(private _deudoresService: DeudoresService,
                 private _alertService: alertService,
-                private _modalRef: NgbActiveModal) {
+                private _modalRef: NgbActiveModal,
+                private _debService: DebtService) {
 
     }
 
@@ -41,29 +42,30 @@ export class EditarNombreComponent implements OnInit {
         this._deudoresService.getDeptor(this.debtorKey)
             .then((response: Debtor) => {
                 this.debtor = response;
-                this.newName.nativeElement.focus();
             });
     }
 
-    updateName(newName: string) {
-        if (this.errorInField(newName)) {
-            this._deudoresService.updateName(this.debtorKey, newName);
+    updateDebtor() {
+        if (!this.errorInField()) {
+            this._debService.updateDebtor(this.debtor, this.debtorKey);
             this.showSuccess();
             this.closeModal();
         }
     }
 
-    showSuccess(){
+    showSuccess() {
         this._alertService.success('Nombre editado correctamente', '');
     }
 
-    errorInField(newName: string) {
-        if (ValidationService.errorInField(newName)) {
-            this._alertService.error('Error tiene que ingresar un nuevo nombre', '');
-            return false
-        } else {
-            return true;
-        }
+    errorInField() {
+        let isError: boolean = false;
+
+        if (this.debtor.nombre == "" || isUndefined(this.debtor.nombre)) isError = true;
+        if (this.debtor.domicilio == "" || isUndefined(this.debtor.domicilio)) isError = true;
+        if (this.debtor.superficie == "" || isUndefined(this.debtor.superficie)) isError = true;
+        if (isUndefined(this.debtor.telefono)) isError = true;
+
+        return isError;
     }
 
     closeModal() {

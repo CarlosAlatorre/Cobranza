@@ -35,6 +35,10 @@ export class DebtService {
             })
     }
 
+    updateDebtor(debtor: Debtor, debtorKey: string) {
+        this.db.object('deudores/' + debtorKey).update(debtor);
+    }
+
     updateDebtToPayOffDept(key: string, totalDeuda: number, totalAbono: number) {
         totalAbono = totalDeuda + totalAbono;
         this.db.list('deudores/')
@@ -130,7 +134,7 @@ export class DebtService {
     saveTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string,
                proximoVencimiento: string, proximoPago: number, currentDate: string, debtorKey: string, bondKey: string) {
 
-        this.db.list('abonos/' + debtorKey + '/' + bondKey).set('ticket',{
+        this.db.list('abonos/' + debtorKey + '/' + bondKey).set('ticket', {
             nombreDeudor: nombreDeudor,
             abono: abono,
             deuda: deuda,

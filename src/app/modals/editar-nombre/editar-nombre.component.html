@@ -1,21 +1,64 @@
-<section>
+<div class="card m-b-0 animated fadeIn" style="width: 700px; height: 300px;">
 
-    <div class="card card-size">
-        <div class="card-header text-center p-b-0">
-            <h4>Editar nombre de "{{ debtor.nombre }}"</h4>
-        </div>
-        <div class="card-body">
-            <div class="form-group form-group--float">
-                <input type="text" class="form-control form-control-line" #newName formControlFloat (keyup.enter)="updateName(newName.value)">
-                <label>Nuevo nombre</label>
-                <i class="form-group__bar"></i>
+    <div class="card-header" align="center">
+        <h3>EDITAR DEUDOR "{{ debtor.nombre }}"</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="offset-1 col-6 p-l-0">
+                <div>Nombre</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;"
+                               [(ngModel)]="debtor.nombre" name="e" autofocus>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>Telefono</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="number" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;"
+                               [(ngModel)]="debtor.telefono" name="e" placeholder="Ejemplo: 6622334455">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="card-footer p-b-0" align="right">
-            <button class="btn btn-danger m-r-10" (click)="closeModal()">Cancelar</button>
-            <button class="btn btn-primary" (click)="updateName(newName.value)">Aceptar</button>
+        <div class="row m-t-20">
+            <div class="offset-1 col-6 p-l-0">
+                <div>Domicilio</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;"
+                               [(ngModel)]="debtor.domicilio" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>Superficie</div>
+                <div class="input-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control p-l-0" style="border-bottom: 1px solid #e0e0e0;"
+                               [(ngModel)]="debtor.superficie" name="e">
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <span class="input-group-addon form-control-line">m2</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
-</section>
+    <div class="card-footer p-l-10 m-t-40" align="right">
+        <button type="submit" class="btn btn-primary m-r-10" (click)="updateDebtor()">Actualizar datos</button>
+        <button class="btn btn-danger" (click)="closeModal()">Cancelar</button>
+    </div>
+
+</div>

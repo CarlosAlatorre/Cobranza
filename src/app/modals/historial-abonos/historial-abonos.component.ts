@@ -3,6 +3,8 @@ import {DebtService} from "../../services/debt.service";
 import {DeudoresService} from "../../services/deudores.service";
 import {Debtor} from "../../interfaces/debtor";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {PrintService} from "../../services/print.service";
+import {tick} from "@angular/core/testing";
 
 @Component({
     selector: 'app-historial-abonos',
@@ -50,6 +52,10 @@ export class HistorialAbonosComponent implements OnInit {
 
     closeModal(){
         this._activeModal.close();
+    }
+
+    printTicket(ticket:any){
+        PrintService.printPayment(ticket.nombreDeudor, ticket.abono, ticket.deuda, ticket.totalDeuda, ticket.vencimiento, ticket.proximoVencimiento, ticket.proximoPago, ticket.fechaActual);
     }
 
 }

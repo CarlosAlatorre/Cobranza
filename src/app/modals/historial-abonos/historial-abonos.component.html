@@ -11,6 +11,7 @@
                     <tr>
                         <th>Abono</th>
                         <th>Fecha</th>
+                        <th>Ticket</th>
                     </tr>
                     </thead>
 
@@ -18,6 +19,12 @@
                     <tr *ngFor="let bond of bonds">
                         <td>${{ bond.abono }}</td>
                         <td>{{ bond.fechaAbono }}</td>
+                        <td *ngIf="bond.ticket">
+                            <i class="zmdi zmdi-print zmdi-hc-2x text-primary cursor-pointer" (click)="printTicket(bond.ticket)"></i>
+                        </td>
+                        <td *ngIf="!bond.ticket">
+                            <i class="zmdi zmdi-close-circle zmdi-hc-2x text-danger"></i>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

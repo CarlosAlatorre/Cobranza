@@ -34,6 +34,7 @@ import {SharedModule} from "../shared/shared.module";
 import {HistorialAbonosComponent} from "../modals/historial-abonos/historial-abonos.component";
 import {DateDiff} from "../services/date-diff.service";
 import {CambiarFechaAbonoComponent} from "../modals/cambiar-fecha-abono/cambiar-fecha-abono.component";
+import {PrintService} from "../services/print.service";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -80,7 +81,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DeudoresService,
         ValidationService,
         AuthService,
-        DateDiff
+        DateDiff,
+        PrintService
     ],
     entryComponents:[
         HistorialComponent,

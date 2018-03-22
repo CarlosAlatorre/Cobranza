@@ -23,7 +23,8 @@ export class CambiarFechaAbonoComponent implements OnInit {
     }
 
     saveDate(){
-        let date = DateService.getDateFormat(this.newDate.toString());
+        let date = DateService.getDateFormat(this.newDate.toString() + ' 00:00');
+        debugger
         this._activeModal.close(date)
     }
 

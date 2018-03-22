@@ -53,10 +53,10 @@ export class DebtService {
     }
 
     setBond(debtorKey: string, bond: number) {
-        this.db.list('abonos/' + debtorKey).push({
+        return this.db.list('abonos/' + debtorKey).push({
             fechaAbono: DateService.getDateNumber(),
             abono: bond
-        })
+        }).key
     }
 
     getBonds(debtorKey: string): Promise<any[]> {
@@ -125,6 +125,22 @@ export class DebtService {
         let timeForExpiration = DateDiff.inDays(currentDate, DateNextPay);
 
         return timeForExpiration < 0;
+    }
+
+    saveTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string,
+               proximoVencimiento: string, proximoPago: number, currentDate: string, debtorKey: string, bondKey: string) {
+
+        this.db.list('abonos/' + debtorKey + '/' + bondKey).set('ticket',{
+            nombreDeudor: nombreDeudor,
+            abono: abono,
+            deuda: deuda,
+            totalDeuda: totalDeber,
+            vencimiento: vencimiento,
+            proximoVencimiento: proximoVencimiento,
+            proximoPago: proximoPago,
+            fechaActual: currentDate
+        })
+
     }
 
 }

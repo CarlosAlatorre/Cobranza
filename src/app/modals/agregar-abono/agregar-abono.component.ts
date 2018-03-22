@@ -55,7 +55,7 @@ export class AgregarAbonoComponent implements OnInit {
     agregarAbono(cantidad: number) {
         let totalDeudaNeta: number = this.userTemp.totalDeuda;
         this.debtService.updateDebt(this.keyDebt, totalDeudaNeta - cantidad, this.abonoAcumulado, this.userTemp.proximoVencimiento);
-        this.debtService.setBond(this.keyDebt, cantidad);
+        return this.debtService.setBond(this.keyDebt, cantidad);
     }
 
     confirmarAbono(abono: string) {
@@ -95,8 +95,10 @@ export class AgregarAbonoComponent implements OnInit {
                                 if (response)
                                     this.userTemp.proximoVencimiento = response;
 
-                                this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
-                                this.agregarAbono(deposit);
+                                let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+                                this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
+                                let keyAbono = this.agregarAbono(deposit);
+                                this.debtService.saveTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.userTemp.$key, keyAbono);
                                 this.alertService.success("Abono agregado", "");
                                 this.closeModal();
                             })
@@ -105,8 +107,11 @@ export class AgregarAbonoComponent implements OnInit {
 
                         } else {
                             //Dejar misma fecha
-                            this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
-                            this.agregarAbono(deposit);
+                            let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+                            this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
+                            let keyAbono = this.agregarAbono(deposit);
+                            debugger
+                            this.debtService.saveTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.userTemp.$key, keyAbono);
                             this.alertService.success("Abono agregado", "");
                             this.closeModal();
                         }
@@ -122,19 +127,21 @@ export class AgregarAbonoComponent implements OnInit {
     }
 
     payOffDebt() {
-        this.printTicket(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
+        let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+        this.printTicket(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
         this.debtService.updateDebtToPayOffDept(this.keyDebt, this.userTemp.totalDeuda, this.userTemp.totalAbono);
+        // this.debtService.saveTicket(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
         this.alertService.success("Deuda pagada", "");
         this.activeModal.close();
     }
 
-    printTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string, proximoVencimiento: string, proximoPago: number) {
+    printTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string, proximoVencimiento: string, proximoPago: number, currentDate: string) {
         if (deuda == abono) {
             proximoVencimiento = "PAGADO";
             proximoPago = 0;
             totalDeber = 0;
         }
-        let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
+
         let mywindow = window.open('', 'PRINT', 'height=450,width=300');
 
         mywindow.document.write('<html><head>');

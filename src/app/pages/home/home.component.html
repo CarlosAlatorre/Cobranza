@@ -34,8 +34,9 @@
                                         </td>
                                         <td class="w-250" style="text-align: center">{{"$"+ deud.totalDeuda+".00"}}</td>
                                         <td class="w-250" align="left"><i class="zmdi zmdi-plus-circle-o zmdi-hc-2x"
-                                                             (click)="openAddMoney(deud.$key)"
-                                                             style="margin-left: 30px;cursor: pointer;"></i></td>
+                                                                          (click)="openAddMoney(deud.$key)"
+                                                                          style="margin-left: 30px;cursor: pointer;"></i>
+                                        </td>
                                         <td class="w-250">
                                             <button class="btn btn-success" (click)="openBondHistory(deud.$key)">Ver
                                             </button>
@@ -63,19 +64,22 @@
                         <div class="offset-1 col-12">
                             <div class="" style="margin-left: 30px;">
                                 <!--añadir-->
-                                <button class="btn br-button size-button" (click)="openAddDebtor()">
-                                    <i class="zmdi zmdi-plus zmdi-hc-5x"></i>
+                                <button class="btn br-button size-button" style="background-color: #2ecc71"
+                                        (click)="openAddDebtor()">
+                                    <i class="zmdi zmdi-plus zmdi-hc-5x text-white"></i>
+                                    <div class="text-white">Nuevo deudor</div>
                                 </button>
                                 <!--reportes-->
                                 <button class="btn br-button size-button"
-                                        style="margin-left: 50px" (click)="openReport()">
-                                    <i class="zmdi zmdi-file-text zmdi-hc-5x"></i>
+                                        style="margin-left: 50px; background-color: #3498db" (click)="openReport()">
+                                    <i class="zmdi zmdi-file-text zmdi-hc-5x text-white"></i>
+                                    <div class="text-white">Generar reporte</div>
                                 </button>
                                 <!--historial-->
-                                <button class="btn br-button size-button"
-                                        style="margin-left: 50px " (click)="openHistory()">
-                                    <i class="zmdi zmdi-time-restore zmdi-hc-5x"></i>
-                                </button>
+                                <!--<button class="btn br-button size-button"-->
+                                <!--style="margin-left: 50px " (click)="openHistory()">-->
+                                <!--<i class="zmdi zmdi-time-restore zmdi-hc-5x"></i>-->
+                                <!--</button>-->
                             </div>
                         </div>
                     </div>
@@ -109,7 +113,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card m-t-50" style="height: 250px">
-                                        <h4 class="card-header p-t-15 p-b-15 p-r-20" style="background-color: #DCDCDC"
+                                        <h4 class="card-header p-t-15 p-b-15 p-r-20" style="background-color: #3498db; color: white;"
                                             align="center">Total</h4>
                                         <div class="card-body m-l-30" style="font-size: 16px">
 

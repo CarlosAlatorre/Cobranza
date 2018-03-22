@@ -54,7 +54,7 @@ export class EditarNombreComponent implements OnInit {
     }
 
     showSuccess() {
-        this._alertService.success('Nombre editado correctamente', '');
+        this._alertService.success('Deudor editado correctamente', '');
     }
 
     errorInField() {

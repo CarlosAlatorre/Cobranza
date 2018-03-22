@@ -118,7 +118,6 @@ export class DebtService {
                 nextExpiration = DateService.getNextMonth(initialDate);
                 break;
         }
-        debugger
         return DateService.getDateFormat(nextExpiration);
     }
 

@@ -6,6 +6,7 @@ import {Angular2Csv} from 'angular2-csv/Angular2-csv';
 import {DebtService} from "../../services/debt.service";
 import {ancestorWhere} from "tslint";
 import {ValidationService} from "../../services/validation.service";
+import {DateService} from "../../services/date.service";
 
 @Component({
     selector: 'app-report',
@@ -19,6 +20,7 @@ export class ReportComponent implements OnInit {
     date: any = new Date();
     deudorTemporal: any[] = [];
     arrayDeudores: any[] = [];
+    arrayLiquidados: any[] = [];
     abonosDeudores: any[] = [];
 
     constructor(private activeModal: NgbActiveModal,
@@ -50,50 +52,87 @@ export class ReportComponent implements OnInit {
         ultimoPago: 'Ultimo Pago',
         ProximoPago: 'Proximo Pago',
         FechaPago: 'Fecha de Pago'
-
     }
 
     ngOnInit() {
         this.deudores = this.db.list('deudores');
         this.deudores.subscribe((result: any) => {
             this.arrayDeudores.push(this.encabezado);
+
             for (let i = 0; i <= result.length - 1; i++) {
-                if (result[i].estado == "deuda" || result[i].estado == "Deuda") {
+                this.deudorTemporal.push(result[i]);
 
-                    this.deudorTemporal.push(result[i]);
+                this._debtorService.getBonds(result[i].$key)
+                    .then((bonds: any[]) => {
+                        let fechaUltimoPago: string = '';
+                        let ultimoPago: number = 0;
 
-                    this._debtorService.getBonds(result[i].$key)
-                        .then((bonds: any[]) => {
-                            let mensualidades:number = 0;
-                            let fechaUltimoPago:string = '';
-                            let ultimoPago:number = 0;
+                        if (bonds.length > 0) {
+                            fechaUltimoPago = bonds[bonds.length - 1].fechaAbono;
+                            ultimoPago = bonds[bonds.length - 1].abono;
+                        }
+                        if (result[i].estado.toLowerCase() == "deuda") {
 
-                            if(bonds.length > 0){
-                                fechaUltimoPago = bonds[bonds.length-1].fechaAbono;
-                                ultimoPago = bonds[bonds.length-1].abono;
-                            }
-                            this.arrayDeudores.push(
-                                {
-                                    nombre: result[i].nombre,
-                                    direccion: result[i].domicilio,
-                                    superficie: result[i].superficie,
-                                    estado: 'Deuda',
-                                    totalDeuda: "$" + result[i].totalDeuda,
-                                    mensualidad: "$" + result[i].proximoPago,
-                                    fechaUltimoPago: fechaUltimoPago,
-                                    ultimoPago: ultimoPago,
-                                    ProximoPago: "$" + result[i].proximoPago,
-                                    FechaPago: result[i].proximoVencimiento
-                                });
-                            console.log(this.arrayDeudores);
-                        })
-                }
+                            let numberExpiration: number = parseInt(result[i].proximoVencimiento.replace(/-/g, ''));
+                            let currentDate: number = parseInt(DateService.getDateNumber().replace(/-/g, ''));
+
+                            if (numberExpiration < currentDate) result[i].estado = 'Vencido';
+
+                            this.arrayDeudores.push({
+                                nombre: result[i].nombre,
+                                direccion: result[i].domicilio,
+                                superficie: result[i].superficie,
+                                estado: result[i].estado,
+                                totalDeuda: "$" + result[i].totalDeuda,
+                                mensualidad: "$" + result[i].proximoPago,
+                                fechaUltimoPago: fechaUltimoPago,
+                                ultimoPago: ultimoPago,
+                                ProximoPago: "$" + result[i].proximoPago,
+                                FechaPago: result[i].proximoVencimiento
+                            });
+                        } else if (result[i].estado.toLowerCase() == 'pagado') {
+                            this.arrayLiquidados.push({
+                                nombre: result[i].nombre,
+                                direccion: result[i].domicilio,
+                                superficie: result[i].superficie,
+                                estado: result[i].estado,
+                                totalDeuda: "$" + result[i].totalDeuda,
+                                mensualidad: "$" + result[i].proximoPago,
+                                fechaUltimoPago: fechaUltimoPago,
+                                ultimoPago: ultimoPago,
+                                ProximoPago: "$" + result[i].proximoPago,
+                                FechaPago: result[i].proximoVencimiento
+                            });
+                        }
+                    })
+
             }
         })
     }
 
     generarCsv() {
-        new Angular2Csv(this.arrayDeudores, "Reporte del dia " + (this.date.getUTCDate()) + "/" + (this.date.getMonth() + 1) + "/" + this.date.getFullYear())
+        let arrayToExport: any[] = [];
+        for(let i in this.arrayDeudores){
+            arrayToExport.push(this.arrayDeudores[i]);
+        }
+        arrayToExport.push({
+            nombre: '',
+            direccion: '',
+            superficie: '',
+            estado: '',
+            totalDeuda: '',
+            mensualidad: '',
+            fechaUltimoPago: '',
+            ultimoPago: '',
+            ProximoPago: '',
+            FechaPago: ''
+        })
+
+        for(let i in this.arrayLiquidados){
+            arrayToExport.push(this.arrayLiquidados[i]);
+        }
+
+        new Angular2Csv(arrayToExport, "Reporte del dia " + (this.date.getUTCDate()) + "/" + (this.date.getMonth() + 1) + "/" + this.date.getFullYear())
     }
 
 

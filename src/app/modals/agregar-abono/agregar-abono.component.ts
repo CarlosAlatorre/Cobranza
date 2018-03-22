@@ -110,7 +110,6 @@ export class AgregarAbonoComponent implements OnInit {
                             let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
                             this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
                             let keyAbono = this.agregarAbono(deposit);
-                            debugger
                             this.debtService.saveTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.userTemp.$key, keyAbono);
                             this.alertService.success("Abono agregado", "");
                             this.closeModal();

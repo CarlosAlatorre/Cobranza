@@ -18,6 +18,7 @@
                             <thead class="thead-inverse">
                             <tr style="width: 750px">
                                 <th scope="col" class="w-300">Nombre</th>
+                                <th scope="col" class="w-200">Estado</th>
                                 <th scope="col" class="w-200">Deuda</th>
                                 <th scope="col" class="w-200">Pagado</th>
                                 <th scope="col" class="w-200">Proximo Pago</th>
@@ -28,6 +29,7 @@
 
                             <tr *ngFor="let reporte of deudorTemporal">
                                 <td class="w-300">{{reporte.nombre}}</td>
+                                <td class="w-200">{{reporte.estado}}</td>
                                 <td class="w-200">{{"$"+reporte.totalDeuda+".00"}}</td>
                                 <td class="w-200">{{"$"+reporte.totalAbono+".00"}}</td>
                                 <td class="w-200">{{"$"+reporte.proximoPago}}</td>

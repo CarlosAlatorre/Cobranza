@@ -72,7 +72,7 @@ export class AgregarAbonoComponent implements OnInit {
 
                 //Verificar si añadir un plazo más para el pago o no
                 // if (DebtService.isNextExpiration(this.userTemp.proximoVencimiento)) {
-                    this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
+                this.userTemp.proximoVencimiento = DebtService.getNextExpiration(this.userTemp.tipoPlazos, this.userTemp.proximoVencimiento);
                 //
                 //     this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago);
                 //     this.agregarAbono(deposit);

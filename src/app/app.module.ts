@@ -1,24 +1,19 @@
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { routing } from './app.routing';
-import { AppComponent } from './app.component';
-import { SharedService } from "./shared/services/shared.service";
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {routing} from './app.routing';
+import {AppComponent} from './app.component';
+import {SharedService} from "./shared/services/shared.service";
 
 // Firebase
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {environment} from '../environments/environment';
 import {LoginComponent} from "./pages/login/login.component";
 import {alertService} from "./services/alert.service";
-import { EditarNombreComponent } from './modals/editar-nombre/editar-nombre.component';
-import { AuthToChangeNameComponent } from './modals/auth-to-change-name/auth-to-change-name.component';
-import { HistorialAbonosComponent } from './modals/historial-abonos/historial-abonos.component';
-import { CambiarFechaAbonoComponent } from './modals/cambiar-fecha-abono/cambiar-fecha-abono.component';
-
 
 
 @NgModule({
@@ -46,7 +41,6 @@ import { CambiarFechaAbonoComponent } from './modals/cambiar-fecha-abono/cambiar
     ],
     bootstrap: [AppComponent]
 })
-
 
 
 export class AppModule {

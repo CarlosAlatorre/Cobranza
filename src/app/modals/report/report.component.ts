@@ -42,6 +42,7 @@ export class ReportComponent implements OnInit {
     };
 
     encabezado: any = {
+        NumeroDeudor: 'NumeroDeudor',
         Nombre: 'Nombre',
         Direccion: 'Direccion',
         Superficie: 'Superficie',
@@ -79,6 +80,7 @@ export class ReportComponent implements OnInit {
                             if (numberExpiration < currentDate) result[i].estado = 'Vencido';
 
                             this.arrayDeudores.push({
+                                numeroDeudor: result[i].numeroDeudor,
                                 nombre: result[i].nombre,
                                 direccion: result[i].domicilio,
                                 superficie: result[i].superficie,
@@ -92,6 +94,7 @@ export class ReportComponent implements OnInit {
                             });
                         } else if (result[i].estado.toLowerCase() == 'pagado') {
                             this.arrayLiquidados.push({
+                                numeroDeudor: result[i].numeroDeudor,
                                 nombre: result[i].nombre,
                                 direccion: result[i].domicilio,
                                 superficie: result[i].superficie,
@@ -105,7 +108,6 @@ export class ReportComponent implements OnInit {
                             });
                         }
                     })
-
             }
         })
     }

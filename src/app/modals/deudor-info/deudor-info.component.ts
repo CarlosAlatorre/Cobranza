@@ -1,19 +1,17 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DeudoresService} from "../../services/deudores.service";
-import {Debtor} from "../../interfaces/debtor";
-import {ValidationService} from "../../services/validation.service";
 import {alertService} from "../../services/alert.service";
-import {NgbActiveModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {isUndefined} from "util";
 import {DebtService} from "../../services/debt.service";
+import {Debtor} from "../../interfaces/debtor";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {isUndefined} from "util";
 
 @Component({
-    selector: 'app-editar-nombre',
-    templateUrl: './editar-nombre.component.html',
-    styleUrls: ['./editar-nombre.component.scss']
+    selector: 'app-deudor-info',
+    templateUrl: './deudor-info.component.html',
+    styleUrls: ['./deudor-info.component.scss']
 })
-export class EditarNombreComponent implements OnInit {
-
+export class DeudorInfoComponent implements OnInit {
     @Input() debtorKey;
     debtor: Debtor = {
         nombre: null,
@@ -73,4 +71,3 @@ export class EditarNombreComponent implements OnInit {
         this._modalRef.close();
     }
 }
-

@@ -16,6 +16,15 @@ export class DebtService {
         return this.db.list('deudores');
     }
 
+    getLiquidados() {
+        return this.db.list('deudores', {
+            query: {
+                orderByChild: 'estado',
+                equalTo: 'Pagado'
+            }
+        })
+    }
+
     getDebtorByKey(key: string) {
         return this.db.object('deudores/' + key);
     }
@@ -39,6 +48,10 @@ export class DebtService {
         this.db.object('deudores/' + debtorKey).update(debtor);
     }
 
+    removeDebtor(debtorKey: string) {
+        this.db.object(`deudores/${debtorKey}`).remove();
+    }
+
     updateDebtToPayOffDept(key: string, totalDeuda: number, totalAbono: number) {
         totalAbono = totalDeuda + totalAbono;
         this.db.list('deudores/')
@@ -51,8 +64,15 @@ export class DebtService {
 
     setDebt(deptor: Debtor): Promise<string> {
         return new Promise(resolve => {
-            let debtorKey: string = this.db.list('deudores').push(deptor).key;
-            resolve(debtorKey);
+            // Obtenemos el numero de deudor para despues darle una clave al deudor
+            const sub = this.db.object('numeroDeudor').subscribe((response: any) => {
+                let numeroDeudor = response.numeroDeudor + 1;
+                deptor.numeroDeudor = numeroDeudor;
+                this.db.object('numeroDeudor').update({numeroDeudor: numeroDeudor});
+                let debtorKey: string = this.db.list('deudores').push(deptor).key;
+                sub.unsubscribe();
+                resolve(debtorKey);
+            })
         })
     }
 

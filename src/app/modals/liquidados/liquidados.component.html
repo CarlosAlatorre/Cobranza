@@ -1,0 +1,67 @@
+<section class=" animated fadeIn">
+    <div class="card-op" *ngIf="showOp"></div>
+    <div class="cardModal">
+        <!--button close-->
+        <i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>
+
+        <div class="row m-t-20">
+            <div class="col-12" align="center">
+                <h1>Liquidados</h1>
+            </div>
+        </div>
+
+        <!--seccion para barra y boton de devolver-->
+        <div class="row">
+            <div class="col-12" align="center">
+                <i class="zmdi zmdi-search m-r-5"></i>
+                <div class="form-group styleSearch m-b-0">
+                    <input class="form-control mr-sm-2 form-control-line  " type="search" placeholder="Buscar un deudor"
+                           aria-label="Search" [(ngModel)]="busqueda" name="busqueda"
+                           (ngModelChange)="searchDebt(busqueda)">
+                    <i class="form-group__bar"></i>
+                </div>
+                <!--<button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="searchDebt(busqueda)">-->
+                <!--Buscar-->
+                <!--</button>-->
+            </div>
+        </div>
+
+        <div class="row" style="padding: 20px;" id="tablaHistorial">
+            <div class="col-12">
+                <!--tabla con los datos obtenidos de firebase-->
+                <table class="table header_fijo">
+                    <thead class="thead-inverse">
+                    <tr class="w-760">
+                        <th scope="col" class="w-400">Nombre</th>
+                        <th scope="col" class="w-150">Estado</th>
+                        <th scope="col" class="w-150">Pagado</th>
+                        <th scope="col" class="w-150">Información</th>
+                        <th scope="col" class="w-150">Historial</th>
+                        <th scope="col" class="w-150">Opción</th>
+                    </tr>
+                    </thead>
+                    <tbody style="overflow-y: auto; height: 400px; width: 760px;">
+                    <perfect-scrollbar>
+                        <tr *ngFor="let debtor of debtorTemp">
+                            <td class="w-400">{{debtor.nombre}}</td>
+                            <td class="w-150">{{debtor.estado}}</td>
+                            <td class="w-150">${{debtor.totalAbono}}.00</td>
+                            <td class="w-150">
+                                <button class="btn btn-primary" (click)="openDeudorInfo(debtor.$key)">Ver</button>
+                            </td>
+                            <td class="w-150">
+                                <button class="btn btn-success" (click)="openBondHistory(debtor.$key)">Ver</button>
+                            </td>
+                            <td class="w-150">
+                                <i class="zmdi zmdi-close-circle zmdi-hc-2x"
+                                   (click)="removeDeudor(debtor.$key)"
+                                   style="margin-left: 30px;cursor: pointer; color: #e74c3c"></i>
+                            </td>
+                        </tr>
+                    </perfect-scrollbar>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

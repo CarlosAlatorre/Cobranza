@@ -15,6 +15,8 @@ import {HistorialAbonosComponent} from "../../modals/historial-abonos/historial-
 import {DateService} from "../../services/date.service";
 import {TypeDate} from "../../enums/type-date.enum";
 import {toInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
+import {Debtor} from "../../interfaces/debtor";
+import {LiquidadosComponent} from "../../modals/liquidados/liquidados.component";
 
 @Component({
     selector: 'app-home',
@@ -34,11 +36,24 @@ export class HomeComponent implements OnInit {
                 private modalService: NgbModal,
                 private af: AngularFireAuth,
                 private router: Router) {
+        //TODO: cambiar esto por un guard
         af.auth.onAuthStateChanged((user) => {
             if (!user) {
                 this.router.navigate(['login'])
             }
         })
+
+        //TODO: Probar primero en modo de pruebas y eliminar este codigo una vez puesto el numero de los deudores
+        // let bool: boolean = false
+        // if (bool) {
+        //     db.list('deudores').subscribe((response: any[]) => {
+        //         for (let i in response) {
+        //             db.object('deudores/' + response[i].$key).update({
+        //                 numeroDeudor: toInteger(i) + 1
+        //             })
+        //         }
+        //     })
+        // }
     }
 
 
@@ -70,21 +85,21 @@ export class HomeComponent implements OnInit {
     }
 
     openAddMoney(keyDebt: string) {
-        this.modalService.open(AuthToChangeNameComponent, {
+        // this.modalService.open(AuthToChangeNameComponent, {
+        //     backdrop: 'static',
+        //     keyboard: false,
+        //     size: "lg"
+        // }).result.then(response => {
+        //     if (response) {
+
+        const modalRef = this.modalService.open(AgregarAbonoComponent, {
             backdrop: 'static',
             keyboard: false,
             size: "lg"
-        }).result.then(response => {
-            if (response) {
-
-                const modalRef = this.modalService.open(AgregarAbonoComponent, {
-                    backdrop: 'static',
-                    keyboard: false,
-                    size: "lg"
-                });
-                modalRef.componentInstance.keyDebt = keyDebt;
-            }
-        })
+        });
+        modalRef.componentInstance.keyDebt = keyDebt;
+        // }
+        // })
     }
 
     openAddDebtor() {
@@ -135,10 +150,14 @@ export class HomeComponent implements OnInit {
         this.modalService.open(ReportComponent, {backdrop: 'static', keyboard: false, size: "lg"});
     }
 
-    isExpired(expiration:string){
+    openLiquidados() {
+        this.modalService.open(LiquidadosComponent, {backdrop: 'static', keyboard: false, size: "lg"})
+    }
 
-        let numberExpiration:number = parseInt(expiration.replace(/-/g, ''));
-        let currentDate:number = parseInt(DateService.getDateNumber().replace(/-/g, ''));
+    isExpired(expiration: string) {
+
+        let numberExpiration: number = parseInt(expiration.replace(/-/g, ''));
+        let currentDate: number = parseInt(DateService.getDateNumber().replace(/-/g, ''));
 
         return numberExpiration < currentDate;
     }

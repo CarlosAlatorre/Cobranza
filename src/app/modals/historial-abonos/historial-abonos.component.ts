@@ -30,6 +30,7 @@ export class HistorialAbonosComponent implements OnInit {
         proximoPago: null,
         proximoVencimiento: null,
         abonos: null,
+        numeroDeudor: null
     }
 
     constructor(private _debtorService: DebtService,

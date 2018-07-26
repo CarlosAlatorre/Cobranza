@@ -38,7 +38,7 @@ export class DateService {
         let date: Date = new Date(dateInString);
 
         let month = ("0" + (date.getMonth() + 1)).slice(-2);
-        let day = ("0" + (date.getUTCDate())).slice(-2);
+        let day = ("0" + (date.getDate())).slice(-2);
         let year = date.getUTCFullYear();
         return (year + '' + month + '' + day);
     }

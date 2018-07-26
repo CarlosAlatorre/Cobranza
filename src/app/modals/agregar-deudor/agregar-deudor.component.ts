@@ -227,7 +227,7 @@ img {
       <tbody>
         <tr>
           <td class="producto">${proximoVencimiento}</td>
-          <td class="precio">${proximoPago}</td>
+          <td class="precio">${proximoPago.toFixed(2)}</td>
         </tr>
       </tbody>
 </table>

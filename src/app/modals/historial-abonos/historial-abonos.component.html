@@ -1,4 +1,4 @@
-<section>
+<section class="animated fadeIn">
 
     <div class="card m-b-0 p-l-15 p-r-15">
         <div class="card-header p-b-5">
@@ -20,7 +20,8 @@
                         <td>${{ bond.abono }}</td>
                         <td>{{ bond.fechaAbono }}</td>
                         <td *ngIf="bond.ticket">
-                            <i class="zmdi zmdi-print zmdi-hc-2x text-primary cursor-pointer" (click)="printTicket(bond.ticket)"></i>
+                            <i class="zmdi zmdi-print zmdi-hc-2x text-primary cursor-pointer"
+                               (click)="printTicket(bond.ticket)"></i>
                         </td>
                         <td *ngIf="!bond.ticket">
                             <i class="zmdi zmdi-close-circle zmdi-hc-2x text-danger"></i>

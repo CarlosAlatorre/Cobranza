@@ -42,18 +42,6 @@ export class HomeComponent implements OnInit {
                 this.router.navigate(['login'])
             }
         })
-
-        //TODO: Probar primero en modo de pruebas y eliminar este codigo una vez puesto el numero de los deudores
-        // let bool: boolean = false
-        // if (bool) {
-        //     db.list('deudores').subscribe((response: any[]) => {
-        //         for (let i in response) {
-        //             db.object('deudores/' + response[i].$key).update({
-        //                 numeroDeudor: toInteger(i) + 1
-        //             })
-        //         }
-        //     })
-        // }
     }
 
 

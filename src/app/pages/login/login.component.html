@@ -1,5 +1,5 @@
-<section>
-    <div style="background-color: white;height: 100vh">
+<section style="overflow: hidden;">
+    <div style="background-color: #edecec;height: 100vh">
         <div class="row">
             <div class="col-12" align="center">
                 <div class="cardLogin">
@@ -18,7 +18,7 @@
                                 <div class="col-10">
                                     <i class="zmdi zmdi-email d-ilb"></i>
                                     <div class="form-group inputFieldStyle">
-                                        <input class="form-control" placeholder="Usuario" type="email"
+                                        <input class="form-control form-control-line" placeholder="Usuario" type="email"
                                                [(ngModel)]="userEmail" name="email" #email required
                                         >
 
@@ -34,7 +34,7 @@
                                     <i class="zmdi zmdi-lock d-ilb"></i>
                                     <div class="form-group inputFieldStyle">
 
-                                        <input class="form-control" type="password"
+                                        <input class="form-control form-control-line" type="password"
                                                [(ngModel)]="userPass" name="pass" required #password
                                                placeholder="Contraseña" (keyup.enter)="verifyFieldsLogin(userEmail,userPass)"
                                         >

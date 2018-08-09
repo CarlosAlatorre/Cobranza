@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Debtor} from '../../interfaces/debtor'
 import {AngularFireDatabase} from "angularfire2/database";
@@ -8,6 +8,7 @@ import {Plazos} from "../../enums/plazos.enum";
 import {DebtService} from "../../services/debt.service";
 import {DateService} from "../../services/date.service";
 import {ancestorWhere} from "tslint";
+import {TypeDate} from "../../enums/type-date.enum";
 
 @Component({
     selector: 'app-agregar-deudor',
@@ -20,11 +21,14 @@ export class AgregarDeudorComponent {
     fechaVencimiento: Date;
     plazoDePago: number = Plazos.semanal;
     Plazos: any = Plazos;
-    anticipo:number;
+    anticipo: number;
+    fijarAbonos: boolean = false;
+
+    @ViewChild('abono') abono: ElementRef;
 
     constructor(private activeModal: NgbActiveModal,
                 private db: AngularFireDatabase,
-                private  alertService: alertService,
+                private alertService: alertService,
                 private debtorService: DebtService,
                 private dateService: DateService) {
     }
@@ -35,7 +39,10 @@ export class AgregarDeudorComponent {
         if (!this.errorInFields()) {
             this.fillRemainingFields();
 
-            this.debtorService.setDebt(this.debtor);
+            this.debtorService.setDebt(this.debtor)
+                .then((debtorKey: string) => {
+                    this.debtorService.setBond(debtorKey, this.anticipo);
+                })
 
             this.activeModal.dismiss();
         } else {
@@ -43,20 +50,37 @@ export class AgregarDeudorComponent {
         }
     }
 
-    fillRemainingFields(){
-        let vencimientoFinal:string = new Date().toString();
-        for(let i = 0; i < this.debtor.numeroPlazos; i++){
-            vencimientoFinal  = DebtService.getNextExpiration(this.debtor.tipoPlazos, vencimientoFinal);
+    fillRemainingFields() {
+        let vencimientoFinal: string = DateService.getDateFormat((new Date()).toString());
+        this.debtor.tipoPlazos = this.plazoDePago;
+        // Get the last expiration
+        for (let i = 0; i < this.debtor.numeroPlazos; i++) {
+            vencimientoFinal = DebtService.getNextExpiration(this.debtor.tipoPlazos, vencimientoFinal);
         }
         this.debtor.vencimiento = vencimientoFinal;
-        this.debtor.fechaInicio = new Date().toString();
+        this.debtor.fechaInicio = DateService.getDateFormat((new Date()).toString());
         this.debtor.estado = "Deuda";
         this.debtor.totalAbono = this.anticipo;
-        this.debtor.tipoPlazos = this.plazoDePago;
         this.debtor.totalDeuda = this.debtor.totalDeuda - this.anticipo;
         this.debtor.proximoVencimiento = DebtService.getNextExpiration(this.debtor.tipoPlazos, this.debtor.fechaInicio);
-        this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
+
+        //TODO: Verificar si quitar esto
+        // this.debtor.proximoPago = DebtService.getNextPay(this.debtor.numeroPlazos, this.debtor.totalDeuda);
+        // this.debtor.proximoPago = this.debtor.abonos;
+        this.debtor.superficie = this.debtor.superficie + ' m2';
         this.printTicket(this.debtor.nombre, this.anticipo, this.debtor.totalDeuda + this.anticipo, this.debtor.totalDeuda, this.debtor.vencimiento, this.debtor.proximoVencimiento, this.debtor.proximoPago)
+    }
+
+    getNextPay(numeroPlazos: number, totalDeuda: number) {
+        if (!this.fijarAbonos)
+            this.debtor.proximoPago = ((totalDeuda ? totalDeuda : 0) - (this.anticipo ? this.anticipo : 0)) / (numeroPlazos ? numeroPlazos : 1);
+    }
+
+    focusToPayBond() {
+        if (this.fijarAbonos)
+            setTimeout(() => {
+                this.abono.nativeElement.focus();
+            }, 100)
     }
 
     errorInFields() {
@@ -85,12 +109,13 @@ export class AgregarDeudorComponent {
         return isError;
     }
 
-    printTicket(nombreDeudor:string, abono:number, deuda:number, totalDeber:number, vencimiento:string, proximoVencimiento:string, proximoPago:number) {
-        if(deuda == abono){
+    printTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string, proximoVencimiento: string, proximoPago: number) {
+        if (deuda == abono) {
             proximoVencimiento = "PAGADO";
             proximoPago = 0;
             totalDeber = 0;
         }
+        let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
         let mywindow = window.open('', 'PRINT', 'height=450,width=300');
 
         mywindow.document.write('<html><head>');
@@ -165,7 +190,8 @@ img {
     <br>
       <br>${nombreDeudor}
       <br>
-      <!--Vencimiento final: ${vencimiento}</p>-->
+      <p>${ currentDate }</p>
+      </p>
       <br>
     <table>
       <thead>
@@ -201,7 +227,7 @@ img {
       <tbody>
         <tr>
           <td class="producto">${proximoVencimiento}</td>
-          <td class="precio">${proximoPago}</td>
+          <td class="precio">${proximoPago.toFixed(2)}</td>
         </tr>
       </tbody>
 </table>
@@ -209,9 +235,9 @@ img {
     <p class="centrado">¡QUE TENGA BUEN DÍA!
       <br><br><br></p>
     <br>
-    <br>
-    <br>
-    <br>
+    <!--<br>-->
+    <!--<br>-->
+    <!--<br>-->
     <button class="oculto-impresion" onclick="imprimir()">Imprimir Ticket</button>
     <br>
     <br>

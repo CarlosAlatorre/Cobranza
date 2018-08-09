@@ -1,66 +1,147 @@
-<section class="  animated fadeIn">
-    <div class="cardAddMoney">
-        <div class="row">
-            <div class="col-12">
-                <i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>
-            </div>
-        </div>
-        <div class="row" align="center">
-            <div class="col-12">
-                <h3>Datos del deudor</h3>
-            </div>
-        </div>
-        <div class="row" algn="center">
+<section class="  animated fadeIn" style="height: 450px;">
+    <div class="row cardAddMoney">
+        <!--Button modal-->
+        <i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>
 
-            <div class="col-8">
-                <div class="row rowInfoStyle">
-                    <div class="col-12">
-                        <span style="font-size: 18px"> <strong>Nombre:</strong></span>
-                        <span style="font-size: 15px">{{userTemp.nombre}} </span>
-                    </div>
-                </div>
-                <div class="row rowInfoStyle">
-                    <div class="col-12">
-                        <span style="font-size: 18px"> <strong>Dirección:</strong></span>
-                        <span style="font-size: 15px">{{userTemp.domicilio}} </span>
-                    </div>
-                </div>
-                <div class="row rowInfoStyle">
-                    <div class="col-12">
-                        <span style="font-size: 18px"> <strong>Teléfono:</strong></span>
-                        <span style="font-size: 15px">{{userTemp.telefono}} </span>
-                    </div>
-                </div>
-                <div class="row rowInfoStyle">
-                    <div class="col-12">
-                        <span style="font-size: 18px"> <strong>Vencimiento:</strong></span>
-                        <span style="font-size: 15px">{{userTemp.vencimiento}} </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="row mt-20">
-                    <div class="col-12">
-                        <span style="font-size: 18px"> <strong>Total a deber:</strong></span>
-                        <div style="font-size: 15px">${{userTemp.totalDeuda}} </div>
-                    </div>
-                </div>
-                <div class="row m-t-10">
-                    <button class="btn btn-primary m-l-20" (click)="payOffDebt()">Liquidar deuda</button>
-                </div>
-                <div class="row m-t-15">
-                    <div class="col-10">
+        <div class="col-8">
+            <div class="">
 
-                        <div  class="form-group inputFieldStyle">
-                            <span style="font-size: 18px"> <strong>Ingresar abono:</strong></span>
-                            <input  class="form-control form-control-line" placeholder="Ingrese la cantidad" type="number"
-                                   #abono (keyup.enter)="confirmarAbono(abono.value)" autofocus max="5"
-                            >
+                <div class="row" align="center">
+                    <div class="col-12 m-t-20">
+                        <h3>Datos del deudor</h3>
+                    </div>
+                </div>
+                <div class="row">
 
-                            <i class="form-group__bar"></i>
+                    <div class="col-8">
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Nombre:</strong></span>
+                                <span style="font-size: 15px">{{userTemp.nombre}} </span>
+                            </div>
+                        </div>
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Dirección:</strong></span>
+                                <span style="font-size: 15px">{{userTemp.domicilio}} </span>
+                            </div>
+                        </div>
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Teléfono:</strong></span>
+                                <span style="font-size: 15px">{{userTemp.telefono}} </span>
+                            </div>
+                        </div>
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Vencimiento:</strong></span>
+                                <span style="font-size: 15px">{{userTemp.vencimiento}} </span>
+                            </div>
+                        </div>
+
+                        <!--Numero abono Mensualidad Ultimo abono-->
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Numero de abono:</strong></span>
+                                <span style="font-size: 15px">{{ abonos.length }} </span>
+                            </div>
+                        </div>
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Mensualidad:</strong></span>
+                                <span style="font-size: 15px"> ${{ userTemp.proximoPago }} </span>
+                            </div>
+                        </div>
+                        <div class="row rowInfoStyle">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Fecha ultimo abono:</strong></span>
+                                <span style="font-size: 15px">{{ fechaUltimoAbono }} </span>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn btn-success m-l-20" (click)="confirmarAbono(abono.value)">Agregar abono</button>
+                    <div class="col-4">
+                        <div class="row mt-20">
+                            <div class="col-12">
+                                <span style="font-size: 18px"> <strong>Total a deber:</strong></span>
+                                <div style="font-size: 15px">${{userTemp.totalDeuda}}</div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10">
+                            <button class="btn btn-primary m-l-20" (click)="payOffDebt()">Liquidar deuda</button>
+                        </div>
+                        <div class="row m-t-15">
+                            <div class="col-10">
+
+                                <div class="form-group inputFieldStyle">
+                                    <span style="font-size: 18px"> <strong>Ingresar abono:</strong></span>
+                                    <input class="form-control form-control-line" placeholder="Cantidad..."
+                                           type="number"
+                                           #abono (keyup.enter)="confirmarAbono(abono.value)" autofocus max="5"
+                                    >
+
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                            <button class="btn btn-success m-l-20" (click)="confirmarAbono(abono.value)">Agregar abono
+                            </button>
+
+                            <label class="custom-control custom-checkbox m-t-20">
+                                <input class="custom-control-input" type="checkbox" [(ngModel)]="noteInTicket">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Agregar nota al ticket</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--NOTES-->
+        <div class="col-4">
+            <div class="note">
+
+
+                <!--NEW NOTE-->
+                <div *ngIf="!note && !isEditNote">
+                    <div class="cursor-pointer text-center p-t-50" (click)="prepareNote()">
+                        <div class="zmdi zmdi-quote not-found-quote"></div>
+                        <div class="not-found">Clic para agregar una nota</div>
+                    </div>
+                </div>
+
+                <!--NOTE VIEW-->
+                <div *ngIf="note && !isEditNote">
+                    <h3 class="text-center p-t-20">Notas</h3>
+                    <p style="font-size: 0.8rem" class="m-b-0 m-l-15">Ultima modificación:</p>
+                    <p style="font-size: 0.8rem" class="m-l-20">{{ note.modifiedDate }}</p>
+
+                    <p class="p-20" style="padding-top: 0 !important;">{{ note.note }}</p>
+
+                    <button class="btn btn-primary btn--icon edit-note" (click)="isEditNote = true;">
+                        <i class="zmdi zmdi-edit"></i>
+                    </button>
+                </div>
+
+                <!--EDIT NOTE-->
+                <div *ngIf="isEditNote">
+                    <h3 class="text-center p-t-20">Notas</h3>
+
+                    <p style="font-size: 0.8rem" class="m-b-0 m-l-15">Ultima modificación:</p>
+                    <p style="font-size: 0.8rem" class="m-l-20">{{ note.modifiedDate }}</p>
+
+                    <div class="form-group m-l-10 m-r-10" style="background-color: white">
+                        <textarea class="form-control p-10" placeholder="Escribe tu nota..." rows="16"
+                                  [(ngModel)]="note.note"></textarea>
+                        <i class="form-group__bar"></i>
+                    </div>
+
+                    <!--EDIT BUTTONS-->
+                    <button class="btn btn-danger btn--icon edit-cancel" (click)="cancelEditNote()">
+                        <i class="zmdi zmdi-close"></i>
+                    </button>
+                    <button class="btn btn-success btn--icon edit-note" (click)="editNote()">
+                        <i class="zmdi zmdi-check"></i>
+                    </button>
                 </div>
             </div>
         </div>

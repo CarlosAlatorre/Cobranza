@@ -1,0 +1,30 @@
+<section>
+
+    <div class="card card-size m-b-0">
+        <div class="card-header m-t-50" style="text-align: center">
+            <h3 class="text-info">Cambiar fecha de proximo abono</h3>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="offset-2 col-8">
+                    <h4 class="m-t-15">Fecha establecida: <span class="text-success">{{ previusDate }}</span></h4>
+
+                    <div class="form-group m-t-50">
+                        <h4>Seleccionar nueva fecha</h4>
+                        <input type="date" class="form-control form-control-line" [(ngModel)]="newDate">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-center">
+
+            <button class="btn btn-danger" (click)="closeModal()">Dejar fecha establecida y abonar</button>
+            <button class="btn btn-success" (click)="saveDate()">Guardar nueva fecha y abonar</button>
+
+        </div>
+    </div>
+
+</section>

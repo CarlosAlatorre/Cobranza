@@ -3,21 +3,23 @@
         <div class="row">
             <div class="col-12">
                 <!--boton de cerrar-->
-                <div class="row">
-                <div class="col-12">
-                <i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>
-                </div>
-                </div>
+                <!--<div class="row">-->
+                <!--<div class="col-12">-->
+                <!--<i class="zmdi zmdi-close-circle closeModal" (click)="closeModal()"></i>-->
+                <!--</div>-->
+                <!--</div>-->
                 <!--titulo-->
-                <div align="center"><h1>Reporte cuentas por cobrar</h1>
+                <div align="center"><h1 class="m-t-15">Reporte cuentas por cobrar</h1>
                 </div>
                 <!--tabla-->
                 <div class="row">
                     <div class="col-12" style="height: 400px">
-                        <table class="table m-t-20 header_fijo m-l-25" id="tablaHistorial" style="width: 750px; height: 400px; background-color: white">
+                        <table class="table m-t-20 header_fijo m-l-25" id="tablaHistorial"
+                               style="width: 750px; height: 400px; background-color: white">
                             <thead class="thead-inverse">
                             <tr style="width: 750px">
                                 <th scope="col" class="w-300">Nombre</th>
+                                <th scope="col" class="w-200">Estado</th>
                                 <th scope="col" class="w-200">Deuda</th>
                                 <th scope="col" class="w-200">Pagado</th>
                                 <th scope="col" class="w-200">Proximo Pago</th>
@@ -28,9 +30,10 @@
 
                             <tr *ngFor="let reporte of deudorTemporal">
                                 <td class="w-300">{{reporte.nombre}}</td>
+                                <td class="w-200">{{reporte.estado}}</td>
                                 <td class="w-200">{{"$"+reporte.totalDeuda+".00"}}</td>
                                 <td class="w-200">{{"$"+reporte.totalAbono+".00"}}</td>
-                                <td class="w-200">{{"$"+reporte.proximoPago}}</td>
+                                <td class="w-200">{{"$"+reporte.proximoPago.toFixed(2)}}</td>
                                 <td class="w-200">{{reporte.proximoVencimiento}}</td>
                             </tr>
                             </tbody>
@@ -39,9 +42,14 @@
                 </div>
                 <!--boton-->
                 <div class="row">
-                    <div class="col-12 m-t-20">
-                        <button class="btn btn-success btn-lg m-t-20 m-b-20" (click)="generarCsv()"
-                                style=" border-radius: 5px 5px 5px 5px; margin-left: 670px;">
+                    <div class="col-12 m-t-20 text-right">
+                        <button class="btn btn-danger btn-lg"
+                                style="border-radius: 5px 5px 5px 5px;"
+                                (click)="closeModal()">Cerrar
+                        </button>
+
+                        <button class="btn btn-success btn-lg m-t-20 m-b-20 m-r-20" (click)="generarCsv()"
+                                style="border-radius: 5px 5px 5px 5px;">
                             Guardar
                         </button>
                     </div>

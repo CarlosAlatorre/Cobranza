@@ -1,0 +1,54 @@
+<div class="card m-b-0 animated fadeIn" style="width: 700px; height: 300px;">
+
+  <div class="card-header" align="center">
+    <h3>Información de: <span class="text-info">{{ debtor.nombre }}</span></h3>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="offset-1 col-6 p-l-0">
+        <div>Nombre</div>
+        <div class="input-group">
+          <div class="form-group">
+            <h5 class="m-t-5">{{ debtor.nombre }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>Telefono</div>
+        <div class="input-group">
+          <div class="form-group">
+            <h5 class="m-t-5">{{ debtor.telefono }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m-t-20">
+      <div class="offset-1 col-6 p-l-0">
+        <div>Domicilio</div>
+        <div class="input-group">
+          <div class="form-group">
+            <h5 class="m-t-5">{{ debtor.domicilio }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>Superficie</div>
+        <div class="input-group">
+          <div class="form-group">
+            <h5 class="m-t-5">{{ debtor.superficie }} m2</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card-footer p-l-10 m-t-40" align="right">
+    <button class="btn btn-danger" (click)="closeModal()">Cerrar</button>
+  </div>
+
+</div>

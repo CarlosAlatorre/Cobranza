@@ -1,0 +1,61 @@
+.cardModal{
+  width:800px;
+  height:600px;
+}
+
+.card-op{
+  width:800px;
+  height:620px;
+  background-color: rgba(128, 128, 128, .8);
+  position: absolute;
+  margin-top: -20px;
+  z-index: 99999;
+}
+
+.closeModal{
+  color: #e74c3c;
+  font-size: 40px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 9999;
+  right: 10px;
+  top: 5px;
+}
+
+.styleSearch{
+  width: 500px;
+  display: inline-block;
+}
+
+.header_fijo {
+  width: 411px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.header_fijo thead tr {
+  display: block;
+  position: relative;
+}
+
+.header_fijo tbody {
+  display: block;
+  width: 100%;
+  height: 180px;
+}
+
+.tBodyStyle{
+  overflow-y: auto;
+  height: 400px;
+  width: 760px;
+}
+
+.w-400{
+  width: 400px;
+}
+.w-150{
+  width: 150px;
+}
+.w-760{
+  width: 760px;
+}

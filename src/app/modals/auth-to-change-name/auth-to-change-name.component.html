@@ -1,0 +1,29 @@
+<section>
+
+    <div class="card m-b-0 p-l-15 p-r-15">
+        <div class="card-header p-b-0 text-center">
+            <h4>Autorización</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group form-group--float">
+                <input type="text" class="form-control form-control-line" formControlFloat [(ngModel)]="email" #emailRef>
+                <label>Correco electrónico</label>
+                <i class="form-group__bar"></i>
+            </div>
+            <div class="form-group form-group--float">
+                <input type="password" class="form-control form-control-line" formControlFloat #contrasenia
+                (keyup.enter)="auth(contrasenia.value)"
+                >
+                <label>Contraseña</label>
+                <i class="form-group__bar"></i>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-danger" (click)="closeModal()">Cancelar</button>
+            <button class="btn btn-success" (click)="auth(contrasenia.value)">Aceptar</button>
+        </div>
+    </div>
+
+</section>

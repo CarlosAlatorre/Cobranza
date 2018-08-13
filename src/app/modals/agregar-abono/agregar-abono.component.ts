@@ -12,6 +12,7 @@ import {AuthToChangeNameComponent} from "../auth-to-change-name/auth-to-change-n
 import {CambiarFechaAbonoComponent} from "../cambiar-fecha-abono/cambiar-fecha-abono.component";
 import {NotesService} from "../../services/notes.service";
 import {Note} from 'app/interfaces/note';
+import "rxjs/add/operator/take";
 
 
 @Component({
@@ -41,7 +42,7 @@ export class AgregarAbonoComponent implements OnInit {
     async ngOnInit() {
         // mandando a llamar al servicio con la llave para que me traega la informacion
         this.Debtor = this.debtService.getDebtorByKey(this.keyDebt);
-        this.Debtor.subscribe((result) => {
+        this.Debtor.take(1).subscribe((result) => {
             this.userTemp = result;
             console.log("abono actual: ", this.userTemp.totalAbono);
         })
@@ -61,7 +62,9 @@ export class AgregarAbonoComponent implements OnInit {
 
     agregarAbono(cantidad: number) {
         let totalDeudaNeta: number = this.userTemp.totalDeuda;
+        debugger
         this.debtService.updateDebt(this.keyDebt, totalDeudaNeta - cantidad, this.abonoAcumulado, this.userTemp.proximoVencimiento);
+        debugger
         return this.debtService.setBond(this.keyDebt, cantidad);
     }
 
@@ -102,7 +105,6 @@ export class AgregarAbonoComponent implements OnInit {
                             modalRef.result.then((response: any) => {
                                 if (response)
                                     this.userTemp.proximoVencimiento = response;
-
                                 let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
                                 if (this.noteInTicket) {
                                     this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.noteInTicket, this.note);
@@ -118,6 +120,7 @@ export class AgregarAbonoComponent implements OnInit {
                             modalRef.componentInstance.previusDate = this.userTemp.proximoVencimiento;
 
                         } else {
+                            debugger
                             //Dejar misma fecha
                             let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
                             if (this.noteInTicket) {
@@ -125,8 +128,10 @@ export class AgregarAbonoComponent implements OnInit {
                             } else {
                                 this.printTicketWithoutNote(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
                             }
+                            debugger
                             let keyAbono = this.agregarAbono(deposit);
                             this.debtService.saveTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.userTemp.$key, keyAbono);
+                            debugger
                             this.alertService.success("Abono agregado", "");
                             this.closeModal();
                         }
@@ -164,8 +169,10 @@ export class AgregarAbonoComponent implements OnInit {
 
     editNote() {
         this.note.modifiedDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmm);
-        if (this.note.note == '')
+        if (this.note.note == '') {
             this.note = null;
+            this.noteInTicket = false;
+        }
 
         this.isEditNote = false;
         this._noteService.updateNote(this.keyDebt, this.note);
@@ -174,6 +181,8 @@ export class AgregarAbonoComponent implements OnInit {
     async cancelEditNote() {
         this.note = await this._noteService.getNote(this.keyDebt)
         this.isEditNote = false
+        if (!this.note)
+            this.noteInTicket = false;
     }
 
     printTicket(nombreDeudor: string, abono: number, deuda: number, totalDeber: number, vencimiento: string, proximoVencimiento: string, proximoPago: number, currentDate: string, noteInTicket: boolean, note: Note) {

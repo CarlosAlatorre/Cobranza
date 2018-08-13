@@ -86,7 +86,7 @@
                             </button>
 
                             <label class="custom-control custom-checkbox m-t-20">
-                                <input class="custom-control-input" type="checkbox" [(ngModel)]="noteInTicket">
+                                <input class="custom-control-input" type="checkbox" [disabled]="!note || note.note == ''" [(ngModel)]="noteInTicket">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Agregar nota al ticket</span>
                             </label>
@@ -136,10 +136,10 @@
                     </div>
 
                     <!--EDIT BUTTONS-->
-                    <button class="btn btn-danger btn--icon edit-cancel" (click)="cancelEditNote()">
+                    <button class="btn btn-danger btn--icon edit-cancel" (click)="cancelEditNote();">
                         <i class="zmdi zmdi-close"></i>
                     </button>
-                    <button class="btn btn-success btn--icon edit-note" (click)="editNote()">
+                    <button class="btn btn-success btn--icon edit-note" (click)="editNote();">
                         <i class="zmdi zmdi-check"></i>
                     </button>
                 </div>

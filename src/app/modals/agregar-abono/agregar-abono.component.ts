@@ -66,6 +66,7 @@ export class AgregarAbonoComponent implements OnInit {
     }
 
     confirmarAbono(abono: string) {
+        debugger
         if (abono == "" || abono == "0") {
             this.alertService.error('No has ingresado una cantidad o la cantidad debe ser mayor a cero', '')
         } else {
@@ -104,9 +105,9 @@ export class AgregarAbonoComponent implements OnInit {
 
                                 let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
                                 if (this.noteInTicket) {
-                                    this.printTicket(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.noteInTicket, this.note);
+                                    this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.noteInTicket, this.note);
                                 } else {
-                                    this.printTicketWithoutNote(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
+                                    this.printTicketWithoutNote(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
                                 }
                                 let keyAbono = this.agregarAbono(deposit);
                                 this.debtService.saveTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.userTemp.$key, keyAbono);
@@ -120,9 +121,9 @@ export class AgregarAbonoComponent implements OnInit {
                             //Dejar misma fecha
                             let currentDate = DateService.getCurrentDate(TypeDate.YYYYMMDDHHmmSS);
                             if (this.noteInTicket) {
-                                this.printTicket(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.noteInTicket, this.note);
+                                this.printTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.noteInTicket, this.note);
                             } else {
-                                this.printTicketWithoutNote(this.userTemp.nombre, this.userTemp.totalDeuda, this.userTemp.totalDeuda, 0, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
+                                this.printTicketWithoutNote(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate);
                             }
                             let keyAbono = this.agregarAbono(deposit);
                             this.debtService.saveTicket(this.userTemp.nombre, deposit, this.userTemp.totalDeuda, this.userTemp.totalDeuda - deposit, this.userTemp.vencimiento, this.userTemp.proximoVencimiento, this.userTemp.proximoPago, currentDate, this.userTemp.$key, keyAbono);
